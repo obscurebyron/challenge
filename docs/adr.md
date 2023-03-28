@@ -82,6 +82,6 @@ _March 27, 2023_
                 Finished installing Knative Eventing
             🚀 Knative install took: 2m25s 
             🎉 Now have some fun with Serverless and Event Driven Apps!
-
+    * Install helm: `brew install helm`
 
 
