@@ -113,6 +113,7 @@ git clone https://github.com/TheBeachMaster/golang-ent.git
 * get a Postgres image: `docker pull postgres`
 * start postgres: `docker run -e POSTGRES_PASSWORD=password postgres`
 * install pgadmin for mac to ease working with db: `brew install --cask pgadmin4`
+* review [this site](https://levelup.gitconnected.com/lets-go-and-build-an-application-with-ent-b45909b3aa90)
 
 The Comments microservice
 -------------------------
@@ -139,7 +140,7 @@ MVP interfaces
     * register user (username) -> return password
     * login (username, password) -> set Cookie
     * authorization ???
-* Articles API
+* Articles API - raw prototype running, 
     * create article (article text)
     * list -> list of articles
     * view article -> contents of one article
