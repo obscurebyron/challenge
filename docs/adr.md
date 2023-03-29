@@ -129,7 +129,7 @@ The Comments microservice
 MVP interfaces
 --------------
 
-* Frontend
+* Frontend - raw prototype running, have login/register/article listing
     * Login page
     * Article listing page
     * Article detail (with comments)
