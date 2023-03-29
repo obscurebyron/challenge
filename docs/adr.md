@@ -101,6 +101,7 @@ python3 -m pip install --upgrade pip
 
 * Install fastapi: `python3 -m pip install fastapi`
 * download existing project with fastapi, motor, and mongodb: `git clone https://github.com/mongodb-developer/mongodb-with-fastapi.git`, `python -m pip install -r requirements.txt`
+* pull the MongoDB docker image: `docker pull mongo`
 
 The Articles microservice
 -------------------------
@@ -134,7 +135,7 @@ MVP interfaces
     * Article listing page
     * Article detail (with comments)
     * User Details
-* User auth API
+* User auth API - raw prototype running, have register and login functioning (bad security - not even using hashes right now)
     * register user (username) -> return password
     * login (username, password) -> set Cookie
     * authorization ???
