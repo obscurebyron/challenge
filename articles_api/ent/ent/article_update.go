@@ -6,13 +6,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
-	"github.com/obscurebyron/challenge/auth_api/ent/predicate"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/predicate"
 )
 
 // ArticleUpdate is the builder for updating Article entities.
@@ -25,32 +24,6 @@ type ArticleUpdate struct {
 // Where appends a list predicates to the ArticleUpdate builder.
 func (au *ArticleUpdate) Where(ps ...predicate.Article) *ArticleUpdate {
 	au.mutation.Where(ps...)
-	return au
-}
-
-// SetTitle sets the "title" field.
-func (au *ArticleUpdate) SetTitle(s string) *ArticleUpdate {
-	au.mutation.SetTitle(s)
-	return au
-}
-
-// SetContent sets the "content" field.
-func (au *ArticleUpdate) SetContent(s string) *ArticleUpdate {
-	au.mutation.SetContent(s)
-	return au
-}
-
-// SetUpdatedAt sets the "updated_at" field.
-func (au *ArticleUpdate) SetUpdatedAt(t time.Time) *ArticleUpdate {
-	au.mutation.SetUpdatedAt(t)
-	return au
-}
-
-// SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (au *ArticleUpdate) SetNillableUpdatedAt(t *time.Time) *ArticleUpdate {
-	if t != nil {
-		au.SetUpdatedAt(*t)
-	}
 	return au
 }
 
@@ -86,25 +59,7 @@ func (au *ArticleUpdate) ExecX(ctx context.Context) {
 	}
 }
 
-// check runs all checks and user-defined validators on the builder.
-func (au *ArticleUpdate) check() error {
-	if v, ok := au.mutation.Title(); ok {
-		if err := article.TitleValidator(v); err != nil {
-			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
-		}
-	}
-	if v, ok := au.mutation.Content(); ok {
-		if err := article.ContentValidator(v); err != nil {
-			return &ValidationError{Name: "content", err: fmt.Errorf(`ent: validator failed for field "Article.content": %w`, err)}
-		}
-	}
-	return nil
-}
-
 func (au *ArticleUpdate) sqlSave(ctx context.Context) (n int, err error) {
-	if err := au.check(); err != nil {
-		return n, err
-	}
 	_spec := sqlgraph.NewUpdateSpec(article.Table, article.Columns, sqlgraph.NewFieldSpec(article.FieldID, field.TypeInt))
 	if ps := au.mutation.predicates; len(ps) > 0 {
 		_spec.Predicate = func(selector *sql.Selector) {
@@ -112,15 +67,6 @@ func (au *ArticleUpdate) sqlSave(ctx context.Context) (n int, err error) {
 				ps[i](selector)
 			}
 		}
-	}
-	if value, ok := au.mutation.Title(); ok {
-		_spec.SetField(article.FieldTitle, field.TypeString, value)
-	}
-	if value, ok := au.mutation.Content(); ok {
-		_spec.SetField(article.FieldContent, field.TypeString, value)
-	}
-	if value, ok := au.mutation.UpdatedAt(); ok {
-		_spec.SetField(article.FieldUpdatedAt, field.TypeTime, value)
 	}
 	if n, err = sqlgraph.UpdateNodes(ctx, au.driver, _spec); err != nil {
 		if _, ok := err.(*sqlgraph.NotFoundError); ok {
@@ -140,32 +86,6 @@ type ArticleUpdateOne struct {
 	fields   []string
 	hooks    []Hook
 	mutation *ArticleMutation
-}
-
-// SetTitle sets the "title" field.
-func (auo *ArticleUpdateOne) SetTitle(s string) *ArticleUpdateOne {
-	auo.mutation.SetTitle(s)
-	return auo
-}
-
-// SetContent sets the "content" field.
-func (auo *ArticleUpdateOne) SetContent(s string) *ArticleUpdateOne {
-	auo.mutation.SetContent(s)
-	return auo
-}
-
-// SetUpdatedAt sets the "updated_at" field.
-func (auo *ArticleUpdateOne) SetUpdatedAt(t time.Time) *ArticleUpdateOne {
-	auo.mutation.SetUpdatedAt(t)
-	return auo
-}
-
-// SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (auo *ArticleUpdateOne) SetNillableUpdatedAt(t *time.Time) *ArticleUpdateOne {
-	if t != nil {
-		auo.SetUpdatedAt(*t)
-	}
-	return auo
 }
 
 // Mutation returns the ArticleMutation object of the builder.
@@ -213,25 +133,7 @@ func (auo *ArticleUpdateOne) ExecX(ctx context.Context) {
 	}
 }
 
-// check runs all checks and user-defined validators on the builder.
-func (auo *ArticleUpdateOne) check() error {
-	if v, ok := auo.mutation.Title(); ok {
-		if err := article.TitleValidator(v); err != nil {
-			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
-		}
-	}
-	if v, ok := auo.mutation.Content(); ok {
-		if err := article.ContentValidator(v); err != nil {
-			return &ValidationError{Name: "content", err: fmt.Errorf(`ent: validator failed for field "Article.content": %w`, err)}
-		}
-	}
-	return nil
-}
-
 func (auo *ArticleUpdateOne) sqlSave(ctx context.Context) (_node *Article, err error) {
-	if err := auo.check(); err != nil {
-		return _node, err
-	}
 	_spec := sqlgraph.NewUpdateSpec(article.Table, article.Columns, sqlgraph.NewFieldSpec(article.FieldID, field.TypeInt))
 	id, ok := auo.mutation.ID()
 	if !ok {
@@ -256,15 +158,6 @@ func (auo *ArticleUpdateOne) sqlSave(ctx context.Context) (_node *Article, err e
 				ps[i](selector)
 			}
 		}
-	}
-	if value, ok := auo.mutation.Title(); ok {
-		_spec.SetField(article.FieldTitle, field.TypeString, value)
-	}
-	if value, ok := auo.mutation.Content(); ok {
-		_spec.SetField(article.FieldContent, field.TypeString, value)
-	}
-	if value, ok := auo.mutation.UpdatedAt(); ok {
-		_spec.SetField(article.FieldUpdatedAt, field.TypeTime, value)
 	}
 	_node = &Article{config: auo.config}
 	_spec.Assign = _node.assignValues

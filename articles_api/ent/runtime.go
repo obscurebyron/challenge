@@ -5,8 +5,8 @@ package ent
 import (
 	"time"
 
-	"github.com/byronka/articles_challenge/ent/article"
-	"github.com/byronka/articles_challenge/ent/schema"
+	"github.com/obscurebyron/challenge/auth_api/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/schema"
 )
 
 // The init function reads all schema descriptors with runtime code

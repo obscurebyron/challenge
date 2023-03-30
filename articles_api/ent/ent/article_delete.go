@@ -8,8 +8,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
-	"github.com/obscurebyron/challenge/auth_api/ent/predicate"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/predicate"
 )
 
 // ArticleDelete is the builder for deleting a Article entity.

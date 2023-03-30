@@ -4,13 +4,11 @@ package ent
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/article"
 )
 
 // ArticleCreate is the builder for creating a Article entity.
@@ -20,52 +18,6 @@ type ArticleCreate struct {
 	hooks    []Hook
 }
 
-// SetTitle sets the "title" field.
-func (ac *ArticleCreate) SetTitle(s string) *ArticleCreate {
-	ac.mutation.SetTitle(s)
-	return ac
-}
-
-// SetContent sets the "content" field.
-func (ac *ArticleCreate) SetContent(s string) *ArticleCreate {
-	ac.mutation.SetContent(s)
-	return ac
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (ac *ArticleCreate) SetCreatedAt(t time.Time) *ArticleCreate {
-	ac.mutation.SetCreatedAt(t)
-	return ac
-}
-
-// SetNillableCreatedAt sets the "created_at" field if the given value is not nil.
-func (ac *ArticleCreate) SetNillableCreatedAt(t *time.Time) *ArticleCreate {
-	if t != nil {
-		ac.SetCreatedAt(*t)
-	}
-	return ac
-}
-
-// SetUpdatedAt sets the "updated_at" field.
-func (ac *ArticleCreate) SetUpdatedAt(t time.Time) *ArticleCreate {
-	ac.mutation.SetUpdatedAt(t)
-	return ac
-}
-
-// SetNillableUpdatedAt sets the "updated_at" field if the given value is not nil.
-func (ac *ArticleCreate) SetNillableUpdatedAt(t *time.Time) *ArticleCreate {
-	if t != nil {
-		ac.SetUpdatedAt(*t)
-	}
-	return ac
-}
-
-// SetID sets the "id" field.
-func (ac *ArticleCreate) SetID(i int) *ArticleCreate {
-	ac.mutation.SetID(i)
-	return ac
-}
-
 // Mutation returns the ArticleMutation object of the builder.
 func (ac *ArticleCreate) Mutation() *ArticleMutation {
 	return ac.mutation
@@ -73,7 +25,6 @@ func (ac *ArticleCreate) Mutation() *ArticleMutation {
 
 // Save creates the Article in the database.
 func (ac *ArticleCreate) Save(ctx context.Context) (*Article, error) {
-	ac.defaults()
 	return withHooks[*Article, ArticleMutation](ctx, ac.sqlSave, ac.mutation, ac.hooks)
 }
 
@@ -99,42 +50,8 @@ func (ac *ArticleCreate) ExecX(ctx context.Context) {
 	}
 }
 
-// defaults sets the default values of the builder before save.
-func (ac *ArticleCreate) defaults() {
-	if _, ok := ac.mutation.CreatedAt(); !ok {
-		v := article.DefaultCreatedAt()
-		ac.mutation.SetCreatedAt(v)
-	}
-	if _, ok := ac.mutation.UpdatedAt(); !ok {
-		v := article.DefaultUpdatedAt()
-		ac.mutation.SetUpdatedAt(v)
-	}
-}
-
 // check runs all checks and user-defined validators on the builder.
 func (ac *ArticleCreate) check() error {
-	if _, ok := ac.mutation.Title(); !ok {
-		return &ValidationError{Name: "title", err: errors.New(`ent: missing required field "Article.title"`)}
-	}
-	if v, ok := ac.mutation.Title(); ok {
-		if err := article.TitleValidator(v); err != nil {
-			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
-		}
-	}
-	if _, ok := ac.mutation.Content(); !ok {
-		return &ValidationError{Name: "content", err: errors.New(`ent: missing required field "Article.content"`)}
-	}
-	if v, ok := ac.mutation.Content(); ok {
-		if err := article.ContentValidator(v); err != nil {
-			return &ValidationError{Name: "content", err: fmt.Errorf(`ent: validator failed for field "Article.content": %w`, err)}
-		}
-	}
-	if _, ok := ac.mutation.CreatedAt(); !ok {
-		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "Article.created_at"`)}
-	}
-	if _, ok := ac.mutation.UpdatedAt(); !ok {
-		return &ValidationError{Name: "updated_at", err: errors.New(`ent: missing required field "Article.updated_at"`)}
-	}
 	return nil
 }
 
@@ -149,10 +66,8 @@ func (ac *ArticleCreate) sqlSave(ctx context.Context) (*Article, error) {
 		}
 		return nil, err
 	}
-	if _spec.ID.Value != _node.ID {
-		id := _spec.ID.Value.(int64)
-		_node.ID = int(id)
-	}
+	id := _spec.ID.Value.(int64)
+	_node.ID = int(id)
 	ac.mutation.id = &_node.ID
 	ac.mutation.done = true
 	return _node, nil
@@ -163,26 +78,6 @@ func (ac *ArticleCreate) createSpec() (*Article, *sqlgraph.CreateSpec) {
 		_node = &Article{config: ac.config}
 		_spec = sqlgraph.NewCreateSpec(article.Table, sqlgraph.NewFieldSpec(article.FieldID, field.TypeInt))
 	)
-	if id, ok := ac.mutation.ID(); ok {
-		_node.ID = id
-		_spec.ID.Value = id
-	}
-	if value, ok := ac.mutation.Title(); ok {
-		_spec.SetField(article.FieldTitle, field.TypeString, value)
-		_node.Title = value
-	}
-	if value, ok := ac.mutation.Content(); ok {
-		_spec.SetField(article.FieldContent, field.TypeString, value)
-		_node.Content = value
-	}
-	if value, ok := ac.mutation.CreatedAt(); ok {
-		_spec.SetField(article.FieldCreatedAt, field.TypeTime, value)
-		_node.CreatedAt = value
-	}
-	if value, ok := ac.mutation.UpdatedAt(); ok {
-		_spec.SetField(article.FieldUpdatedAt, field.TypeTime, value)
-		_node.UpdatedAt = value
-	}
 	return _node, _spec
 }
 
@@ -200,7 +95,6 @@ func (acb *ArticleCreateBulk) Save(ctx context.Context) ([]*Article, error) {
 	for i := range acb.builders {
 		func(i int, root context.Context) {
 			builder := acb.builders[i]
-			builder.defaults()
 			var mut Mutator = MutateFunc(func(ctx context.Context, m Mutation) (Value, error) {
 				mutation, ok := m.(*ArticleMutation)
 				if !ok {
@@ -227,7 +121,7 @@ func (acb *ArticleCreateBulk) Save(ctx context.Context) ([]*Article, error) {
 					return nil, err
 				}
 				mutation.id = &nodes[i].ID
-				if specs[i].ID.Value != nil && nodes[i].ID == 0 {
+				if specs[i].ID.Value != nil {
 					id := specs[i].ID.Value.(int64)
 					nodes[i].ID = int(id)
 				}

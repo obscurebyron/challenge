@@ -10,8 +10,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
-	"github.com/obscurebyron/challenge/auth_api/ent/predicate"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/predicate"
 )
 
 // ArticleQuery is the builder for querying Article entities.
@@ -257,18 +257,6 @@ func (aq *ArticleQuery) Clone() *ArticleQuery {
 
 // GroupBy is used to group vertices by one or more fields/columns.
 // It is often used with aggregate functions, like: count, max, mean, min, sum.
-//
-// Example:
-//
-//	var v []struct {
-//		Title string `json:"title,omitempty"`
-//		Count int `json:"count,omitempty"`
-//	}
-//
-//	client.Article.Query().
-//		GroupBy(article.FieldTitle).
-//		Aggregate(ent.Count()).
-//		Scan(ctx, &v)
 func (aq *ArticleQuery) GroupBy(field string, fields ...string) *ArticleGroupBy {
 	aq.ctx.Fields = append([]string{field}, fields...)
 	grbuild := &ArticleGroupBy{build: aq}
@@ -280,16 +268,6 @@ func (aq *ArticleQuery) GroupBy(field string, fields ...string) *ArticleGroupBy 
 
 // Select allows the selection one or more fields/columns for the given query,
 // instead of selecting all fields in the entity.
-//
-// Example:
-//
-//	var v []struct {
-//		Title string `json:"title,omitempty"`
-//	}
-//
-//	client.Article.Query().
-//		Select(article.FieldTitle).
-//		Scan(ctx, &v)
 func (aq *ArticleQuery) Select(fields ...string) *ArticleSelect {
 	aq.ctx.Fields = append(aq.ctx.Fields, fields...)
 	sbuild := &ArticleSelect{ArticleQuery: aq}

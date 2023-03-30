@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/obscurebyron/challenge/auth_api/ent"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent"
 )
 
 // The ArticleFunc type is an adapter to allow the use of ordinary

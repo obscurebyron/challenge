@@ -11,7 +11,7 @@ import (
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/article"
 )
 
 // ent aliases to avoid import conflicts in user's code.

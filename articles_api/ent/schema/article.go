@@ -2,6 +2,7 @@ package schema
 
 import (
 	"time"
+
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
 )

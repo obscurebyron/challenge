@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/byronka/articles_challenge/ent/predicate"
+	"github.com/obscurebyron/challenge/auth_api/ent/predicate"
 )
 
 // ID filters vertices based on their ID field.

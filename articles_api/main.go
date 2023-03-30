@@ -6,12 +6,13 @@ import (
 	"log"
 
 	"entgo.io/ent/dialect"
-	"github.com/byronka/articles_challenge/ent"
-	"github.com/byronka/articles_challenge/ent/article"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	_ "github.com/lib/pq"
+	"github.com/obscurebyron/challenge/auth_api/ent"
+	"github.com/obscurebyron/challenge/auth_api/ent/article"
 	"github.com/spf13/viper"
 )
 

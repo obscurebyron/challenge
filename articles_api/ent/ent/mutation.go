@@ -7,12 +7,10 @@ import (
 	"errors"
 	"fmt"
 	"sync"
-	"time"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect/sql"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
-	"github.com/obscurebyron/challenge/auth_api/ent/predicate"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/predicate"
 )
 
 const (
@@ -33,10 +31,6 @@ type ArticleMutation struct {
 	op            Op
 	typ           string
 	id            *int
-	title         *string
-	content       *string
-	created_at    *time.Time
-	updated_at    *time.Time
 	clearedFields map[string]struct{}
 	done          bool
 	oldValue      func(context.Context) (*Article, error)
@@ -113,12 +107,6 @@ func (m ArticleMutation) Tx() (*Tx, error) {
 	return tx, nil
 }
 
-// SetID sets the value of the id field. Note that this
-// operation is only accepted on creation of Article entities.
-func (m *ArticleMutation) SetID(id int) {
-	m.id = &id
-}
-
 // ID returns the ID value in the mutation. Note that the ID is only available
 // if it was provided to the builder or after it was returned from the database.
 func (m *ArticleMutation) ID() (id int, exists bool) {
@@ -145,150 +133,6 @@ func (m *ArticleMutation) IDs(ctx context.Context) ([]int, error) {
 	default:
 		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
 	}
-}
-
-// SetTitle sets the "title" field.
-func (m *ArticleMutation) SetTitle(s string) {
-	m.title = &s
-}
-
-// Title returns the value of the "title" field in the mutation.
-func (m *ArticleMutation) Title() (r string, exists bool) {
-	v := m.title
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldTitle returns the old "title" field's value of the Article entity.
-// If the Article object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *ArticleMutation) OldTitle(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldTitle is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldTitle requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldTitle: %w", err)
-	}
-	return oldValue.Title, nil
-}
-
-// ResetTitle resets all changes to the "title" field.
-func (m *ArticleMutation) ResetTitle() {
-	m.title = nil
-}
-
-// SetContent sets the "content" field.
-func (m *ArticleMutation) SetContent(s string) {
-	m.content = &s
-}
-
-// Content returns the value of the "content" field in the mutation.
-func (m *ArticleMutation) Content() (r string, exists bool) {
-	v := m.content
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldContent returns the old "content" field's value of the Article entity.
-// If the Article object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *ArticleMutation) OldContent(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldContent is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldContent requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldContent: %w", err)
-	}
-	return oldValue.Content, nil
-}
-
-// ResetContent resets all changes to the "content" field.
-func (m *ArticleMutation) ResetContent() {
-	m.content = nil
-}
-
-// SetCreatedAt sets the "created_at" field.
-func (m *ArticleMutation) SetCreatedAt(t time.Time) {
-	m.created_at = &t
-}
-
-// CreatedAt returns the value of the "created_at" field in the mutation.
-func (m *ArticleMutation) CreatedAt() (r time.Time, exists bool) {
-	v := m.created_at
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldCreatedAt returns the old "created_at" field's value of the Article entity.
-// If the Article object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *ArticleMutation) OldCreatedAt(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldCreatedAt is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldCreatedAt requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldCreatedAt: %w", err)
-	}
-	return oldValue.CreatedAt, nil
-}
-
-// ResetCreatedAt resets all changes to the "created_at" field.
-func (m *ArticleMutation) ResetCreatedAt() {
-	m.created_at = nil
-}
-
-// SetUpdatedAt sets the "updated_at" field.
-func (m *ArticleMutation) SetUpdatedAt(t time.Time) {
-	m.updated_at = &t
-}
-
-// UpdatedAt returns the value of the "updated_at" field in the mutation.
-func (m *ArticleMutation) UpdatedAt() (r time.Time, exists bool) {
-	v := m.updated_at
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldUpdatedAt returns the old "updated_at" field's value of the Article entity.
-// If the Article object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *ArticleMutation) OldUpdatedAt(ctx context.Context) (v time.Time, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldUpdatedAt is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldUpdatedAt requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldUpdatedAt: %w", err)
-	}
-	return oldValue.UpdatedAt, nil
-}
-
-// ResetUpdatedAt resets all changes to the "updated_at" field.
-func (m *ArticleMutation) ResetUpdatedAt() {
-	m.updated_at = nil
 }
 
 // Where appends a list predicates to the ArticleMutation builder.
@@ -325,19 +169,7 @@ func (m *ArticleMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *ArticleMutation) Fields() []string {
-	fields := make([]string, 0, 4)
-	if m.title != nil {
-		fields = append(fields, article.FieldTitle)
-	}
-	if m.content != nil {
-		fields = append(fields, article.FieldContent)
-	}
-	if m.created_at != nil {
-		fields = append(fields, article.FieldCreatedAt)
-	}
-	if m.updated_at != nil {
-		fields = append(fields, article.FieldUpdatedAt)
-	}
+	fields := make([]string, 0, 0)
 	return fields
 }
 
@@ -345,16 +177,6 @@ func (m *ArticleMutation) Fields() []string {
 // return value indicates that this field was not set, or was not defined in the
 // schema.
 func (m *ArticleMutation) Field(name string) (ent.Value, bool) {
-	switch name {
-	case article.FieldTitle:
-		return m.Title()
-	case article.FieldContent:
-		return m.Content()
-	case article.FieldCreatedAt:
-		return m.CreatedAt()
-	case article.FieldUpdatedAt:
-		return m.UpdatedAt()
-	}
 	return nil, false
 }
 
@@ -362,16 +184,6 @@ func (m *ArticleMutation) Field(name string) (ent.Value, bool) {
 // returned if the mutation operation is not UpdateOne, or the query to the
 // database failed.
 func (m *ArticleMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
-	switch name {
-	case article.FieldTitle:
-		return m.OldTitle(ctx)
-	case article.FieldContent:
-		return m.OldContent(ctx)
-	case article.FieldCreatedAt:
-		return m.OldCreatedAt(ctx)
-	case article.FieldUpdatedAt:
-		return m.OldUpdatedAt(ctx)
-	}
 	return nil, fmt.Errorf("unknown Article field %s", name)
 }
 
@@ -380,34 +192,6 @@ func (m *ArticleMutation) OldField(ctx context.Context, name string) (ent.Value,
 // type.
 func (m *ArticleMutation) SetField(name string, value ent.Value) error {
 	switch name {
-	case article.FieldTitle:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetTitle(v)
-		return nil
-	case article.FieldContent:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetContent(v)
-		return nil
-	case article.FieldCreatedAt:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetCreatedAt(v)
-		return nil
-	case article.FieldUpdatedAt:
-		v, ok := value.(time.Time)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetUpdatedAt(v)
-		return nil
 	}
 	return fmt.Errorf("unknown Article field %s", name)
 }
@@ -429,8 +213,6 @@ func (m *ArticleMutation) AddedField(name string) (ent.Value, bool) {
 // the field is not defined in the schema, or if the type mismatched the field
 // type.
 func (m *ArticleMutation) AddField(name string, value ent.Value) error {
-	switch name {
-	}
 	return fmt.Errorf("unknown Article numeric field %s", name)
 }
 
@@ -456,20 +238,6 @@ func (m *ArticleMutation) ClearField(name string) error {
 // ResetField resets all changes in the mutation for the field with the given name.
 // It returns an error if the field is not defined in the schema.
 func (m *ArticleMutation) ResetField(name string) error {
-	switch name {
-	case article.FieldTitle:
-		m.ResetTitle()
-		return nil
-	case article.FieldContent:
-		m.ResetContent()
-		return nil
-	case article.FieldCreatedAt:
-		m.ResetCreatedAt()
-		return nil
-	case article.FieldUpdatedAt:
-		m.ResetUpdatedAt()
-		return nil
-	}
 	return fmt.Errorf("unknown Article field %s", name)
 }
 

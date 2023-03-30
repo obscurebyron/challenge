@@ -8,12 +8,12 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/obscurebyron/challenge/auth_api/ent/migrate"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/migrate"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/article"
 )
 
 // Client is the client that holds all ent builders.

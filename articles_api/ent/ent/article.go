@@ -5,25 +5,16 @@ package ent
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/obscurebyron/challenge/auth_api/ent/article"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/article"
 )
 
 // Article is the model entity for the Article schema.
 type Article struct {
-	config `json:"-"`
+	config
 	// ID of the ent.
-	ID int `json:"oid,omitempty"`
-	// Title holds the value of the "title" field.
-	Title string `json:"title,omitempty"`
-	// Content holds the value of the "content" field.
-	Content string `json:"content,omitempty"`
-	// CreatedAt holds the value of the "created_at" field.
-	CreatedAt time.Time `json:"created_at,omitempty"`
-	// UpdatedAt holds the value of the "updated_at" field.
-	UpdatedAt time.Time `json:"updated_at,omitempty"`
+	ID int `json:"id,omitempty"`
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -33,10 +24,6 @@ func (*Article) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case article.FieldID:
 			values[i] = new(sql.NullInt64)
-		case article.FieldTitle, article.FieldContent:
-			values[i] = new(sql.NullString)
-		case article.FieldCreatedAt, article.FieldUpdatedAt:
-			values[i] = new(sql.NullTime)
 		default:
 			return nil, fmt.Errorf("unexpected column %q for type Article", columns[i])
 		}
@@ -58,30 +45,6 @@ func (a *Article) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			a.ID = int(value.Int64)
-		case article.FieldTitle:
-			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field title", values[i])
-			} else if value.Valid {
-				a.Title = value.String
-			}
-		case article.FieldContent:
-			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field content", values[i])
-			} else if value.Valid {
-				a.Content = value.String
-			}
-		case article.FieldCreatedAt:
-			if value, ok := values[i].(*sql.NullTime); !ok {
-				return fmt.Errorf("unexpected type %T for field created_at", values[i])
-			} else if value.Valid {
-				a.CreatedAt = value.Time
-			}
-		case article.FieldUpdatedAt:
-			if value, ok := values[i].(*sql.NullTime); !ok {
-				return fmt.Errorf("unexpected type %T for field updated_at", values[i])
-			} else if value.Valid {
-				a.UpdatedAt = value.Time
-			}
 		}
 	}
 	return nil
@@ -109,18 +72,7 @@ func (a *Article) Unwrap() *Article {
 func (a *Article) String() string {
 	var builder strings.Builder
 	builder.WriteString("Article(")
-	builder.WriteString(fmt.Sprintf("id=%v, ", a.ID))
-	builder.WriteString("title=")
-	builder.WriteString(a.Title)
-	builder.WriteString(", ")
-	builder.WriteString("content=")
-	builder.WriteString(a.Content)
-	builder.WriteString(", ")
-	builder.WriteString("created_at=")
-	builder.WriteString(a.CreatedAt.Format(time.ANSIC))
-	builder.WriteString(", ")
-	builder.WriteString("updated_at=")
-	builder.WriteString(a.UpdatedAt.Format(time.ANSIC))
+	builder.WriteString(fmt.Sprintf("id=%v", a.ID))
 	builder.WriteByte(')')
 	return builder.String()
 }

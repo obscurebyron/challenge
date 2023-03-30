@@ -9,7 +9,6 @@ import (
 	"entgo.io/contrib/entoas"
 	"entgo.io/ent/entc"
 	"entgo.io/ent/entc/gen"
-	"github.com/ogen-go/ogen"
 )
 
 func main() {

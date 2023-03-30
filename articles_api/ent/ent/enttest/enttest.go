@@ -5,12 +5,12 @@ package enttest
 import (
 	"context"
 
-	"github.com/obscurebyron/challenge/auth_api/ent"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent"
 	// required by schema hooks.
-	_ "github.com/obscurebyron/challenge/auth_api/ent/runtime"
+	_ "github.com/obscurebyron/challenge/auth_api/ent/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
-	"github.com/obscurebyron/challenge/auth_api/ent/migrate"
+	"github.com/obscurebyron/challenge/auth_api/ent/ent/migrate"
 )
 
 type (
