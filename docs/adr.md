@@ -114,6 +114,13 @@ git clone https://github.com/TheBeachMaster/golang-ent.git
 * start postgres: `docker run -e POSTGRES_PASSWORD=password postgres`
 * install pgadmin for mac to ease working with db: `brew install --cask pgadmin4`
 * review [this site](https://levelup.gitconnected.com/lets-go-and-build-an-application-with-ent-b45909b3aa90)
+* installing openapi spec - reading [this](https://pkg.go.dev/entgo.io/contrib/entoas#section-readme)
+    * per instructions, installing entoas: `go get -u entgo.io/contrib/entoas`
+* installing ogent, reading [this](https://github.com/ariga/ogent)
+    * install: `go get ariga.io/ogent@main`
+    * This didn't really do what I hoped/expected (which was to show a nice UI
+    for the endpoints).  Instead, it built an OpenAPI spec and then generated
+    the whole set of CRUD operations for the class I have currently ("Article"))
 
 The Comments microservice
 -------------------------
