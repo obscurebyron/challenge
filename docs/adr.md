@@ -40,6 +40,7 @@ Basic setup
     * add `export PATH=$PATH:/Users/byron/bin` to ~/.zshrc
     * run `kn quickstart kind` and it appears to work:
 
+
         byron@Byrons-MBP challenge % kn quickstart kind
         Running Knative Quickstart using Kind
         ✅ Checking dependencies...
@@ -83,6 +84,8 @@ Basic setup
             Finished installing Knative Eventing
         🚀 Knative install took: 2m25s 
         🎉 Now have some fun with Serverless and Event Driven Apps!
+
+
 * Install helm: `brew install helm`
 
 The frontend
@@ -96,8 +99,8 @@ The User microservice
 
 * Install pip: 
 
-python3 -m pip install --upgrade setuptools
-python3 -m pip install --upgrade pip
+    python3 -m pip install --upgrade setuptools
+    python3 -m pip install --upgrade pip
 
 * Install fastapi: `python3 -m pip install fastapi`
 * download existing project with fastapi, motor, and mongodb: `git clone https://github.com/mongodb-developer/mongodb-with-fastapi.git`, `python -m pip install -r requirements.txt`
@@ -108,7 +111,7 @@ The Articles microservice
 
 * Example project using suggested tech: Go, Fiber, Ent, Postgres
 
-git clone https://github.com/TheBeachMaster/golang-ent.git
+    git clone https://github.com/TheBeachMaster/golang-ent.git
 
 * get a Postgres image: `docker pull postgres`
 * start postgres: `docker run -e POSTGRES_PASSWORD=password postgres`
