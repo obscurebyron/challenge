@@ -1,0 +1,23 @@
+apiVersion: v2
+name: challenge-project
+description: A blogging platform built with microservices and eclectic tooling
+type: application
+version: 0.1.0
+appVersion: "v0.6.0"
+home: "https://github.com/obscurebyron/challenge"
+keywords:
+  - challenge
+  - microservice
+  - example
+  - helm
+  - kubernetes
+  - database
+  - sql
+  - nosql
+  - cluster
+  - Python
+  - Golang
+  - TypeScript
+maintainers:
+  - name: Byron Katz
+    email: b.katz@obscuritylabs.com
