@@ -212,7 +212,7 @@ Left to do
         * learning concepts, 
         * adjusting organization, 
         * reviewing checklists, 
-        * design choices. 
+        * design choices, big and small
         * Down time.  
         * Reflection. 
         * Distractions - various meetings and getting to know team and environmental context. 
