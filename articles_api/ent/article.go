@@ -16,6 +16,8 @@ type Article struct {
 	config `json:"-"`
 	// ID of the ent.
 	ID int `json:"oid,omitempty"`
+	// Slug holds the value of the "slug" field.
+	Slug string `json:"slug,omitempty"`
 	// Title holds the value of the "title" field.
 	Title string `json:"title,omitempty"`
 	// Excerpt holds the value of the "excerpt" field.
@@ -45,7 +47,7 @@ func (*Article) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case article.FieldID:
 			values[i] = new(sql.NullInt64)
-		case article.FieldTitle, article.FieldExcerpt, article.FieldCoverImage, article.FieldDate, article.FieldAuthorName, article.FieldAuthorPictureURL, article.FieldOpenGraphImageURL, article.FieldContent:
+		case article.FieldSlug, article.FieldTitle, article.FieldExcerpt, article.FieldCoverImage, article.FieldDate, article.FieldAuthorName, article.FieldAuthorPictureURL, article.FieldOpenGraphImageURL, article.FieldContent:
 			values[i] = new(sql.NullString)
 		case article.FieldCreatedAt, article.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
@@ -70,6 +72,12 @@ func (a *Article) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field id", value)
 			}
 			a.ID = int(value.Int64)
+		case article.FieldSlug:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field slug", values[i])
+			} else if value.Valid {
+				a.Slug = value.String
+			}
 		case article.FieldTitle:
 			if value, ok := values[i].(*sql.NullString); !ok {
 				return fmt.Errorf("unexpected type %T for field title", values[i])
@@ -158,6 +166,9 @@ func (a *Article) String() string {
 	var builder strings.Builder
 	builder.WriteString("Article(")
 	builder.WriteString(fmt.Sprintf("id=%v, ", a.ID))
+	builder.WriteString("slug=")
+	builder.WriteString(a.Slug)
+	builder.WriteString(", ")
 	builder.WriteString("title=")
 	builder.WriteString(a.Title)
 	builder.WriteString(", ")

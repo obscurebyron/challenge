@@ -10,19 +10,12 @@ To start locally:
     
 Endpoints:
 
-Add a new article:
+Get all articles:
 -----------------
 
-PUT /article 
-content-type: "application/json"
+GET /article 
 
-required structure example: 
-{
-    "title" : "my title",
-    "content" : "this is my article's content"
-}
-
-Retrieve an article by its title
+Retrieve an article by its slug
 --------------------------------
 
-GET /article/:title 
+GET /article/:slug 

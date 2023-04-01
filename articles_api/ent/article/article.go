@@ -11,6 +11,8 @@ const (
 	Label = "article"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
+	// FieldSlug holds the string denoting the slug field in the database.
+	FieldSlug = "slug"
 	// FieldTitle holds the string denoting the title field in the database.
 	FieldTitle = "title"
 	// FieldExcerpt holds the string denoting the excerpt field in the database.
@@ -38,6 +40,7 @@ const (
 // Columns holds all SQL columns for article fields.
 var Columns = []string{
 	FieldID,
+	FieldSlug,
 	FieldTitle,
 	FieldExcerpt,
 	FieldCoverImage,
@@ -61,6 +64,8 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// SlugValidator is a validator for the "slug" field. It is called by the builders before save.
+	SlugValidator func(string) error
 	// TitleValidator is a validator for the "title" field. It is called by the builders before save.
 	TitleValidator func(string) error
 	// ExcerptValidator is a validator for the "excerpt" field. It is called by the builders before save.

@@ -49,35 +49,22 @@ func main() {
 		return c.SendString("Hello, World!")
 	})
 
-	app.Put("/article", func(c *fiber.Ctx) error {
-		// receive a new article
-		payload := struct {
-			Content string `json:"content"`
-			Title   string `json:"title"`
-		}{}
-
-		if err := c.BodyParser(&payload); err != nil {
-			return err
-		}
-
-		article, err := client.Article.
-			Create().
-			SetContent(payload.Content).
-			SetTitle(payload.Title).
-			Save(ctx)
-		if err != nil {
-			return fmt.Errorf("failed creating article: %w", err)
-		}
-		log.Println("article created was: ", article)
-		return c.JSON(payload)
-	})
-
-	app.Get("/article/:title", func(c *fiber.Ctx) error {
-		// send an article by its title
-		title := c.Params("title")
-		article, err := client.Article.Query().Where(article.Title(title)).Only(ctx)
+	// get all articles
+	app.Get("/article/", func(c *fiber.Ctx) error {
+		articles, err := client.Article.Query().All(ctx)
 		if err != nil {
 			return fmt.Errorf("failed querying article: %w", err)
+		}
+		return c.JSON(articles)
+	})
+
+	// get an article by its slug
+	app.Get("/article/:slug", func(c *fiber.Ctx) error {
+		// send an article by its slug
+		slug := c.Params("slug")
+		article, err := client.Article.Query().Where(article.Slug(slug)).Only(ctx)
+		if err != nil {
+			return fmt.Errorf("failed querying article using slug %s: %w", slug, err)
 		}
 		return c.JSON(article)
 	})

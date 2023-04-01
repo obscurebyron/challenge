@@ -28,6 +28,12 @@ func (au *ArticleUpdate) Where(ps ...predicate.Article) *ArticleUpdate {
 	return au
 }
 
+// SetSlug sets the "slug" field.
+func (au *ArticleUpdate) SetSlug(s string) *ArticleUpdate {
+	au.mutation.SetSlug(s)
+	return au
+}
+
 // SetTitle sets the "title" field.
 func (au *ArticleUpdate) SetTitle(s string) *ArticleUpdate {
 	au.mutation.SetTitle(s)
@@ -124,6 +130,11 @@ func (au *ArticleUpdate) ExecX(ctx context.Context) {
 
 // check runs all checks and user-defined validators on the builder.
 func (au *ArticleUpdate) check() error {
+	if v, ok := au.mutation.Slug(); ok {
+		if err := article.SlugValidator(v); err != nil {
+			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "Article.slug": %w`, err)}
+		}
+	}
 	if v, ok := au.mutation.Title(); ok {
 		if err := article.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
@@ -179,6 +190,9 @@ func (au *ArticleUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			}
 		}
 	}
+	if value, ok := au.mutation.Slug(); ok {
+		_spec.SetField(article.FieldSlug, field.TypeString, value)
+	}
 	if value, ok := au.mutation.Title(); ok {
 		_spec.SetField(article.FieldTitle, field.TypeString, value)
 	}
@@ -224,6 +238,12 @@ type ArticleUpdateOne struct {
 	fields   []string
 	hooks    []Hook
 	mutation *ArticleMutation
+}
+
+// SetSlug sets the "slug" field.
+func (auo *ArticleUpdateOne) SetSlug(s string) *ArticleUpdateOne {
+	auo.mutation.SetSlug(s)
+	return auo
 }
 
 // SetTitle sets the "title" field.
@@ -335,6 +355,11 @@ func (auo *ArticleUpdateOne) ExecX(ctx context.Context) {
 
 // check runs all checks and user-defined validators on the builder.
 func (auo *ArticleUpdateOne) check() error {
+	if v, ok := auo.mutation.Slug(); ok {
+		if err := article.SlugValidator(v); err != nil {
+			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "Article.slug": %w`, err)}
+		}
+	}
 	if v, ok := auo.mutation.Title(); ok {
 		if err := article.TitleValidator(v); err != nil {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
@@ -406,6 +431,9 @@ func (auo *ArticleUpdateOne) sqlSave(ctx context.Context) (_node *Article, err e
 				ps[i](selector)
 			}
 		}
+	}
+	if value, ok := auo.mutation.Slug(); ok {
+		_spec.SetField(article.FieldSlug, field.TypeString, value)
 	}
 	if value, ok := auo.mutation.Title(); ok {
 		_spec.SetField(article.FieldTitle, field.TypeString, value)

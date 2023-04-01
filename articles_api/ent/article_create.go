@@ -20,6 +20,12 @@ type ArticleCreate struct {
 	hooks    []Hook
 }
 
+// SetSlug sets the "slug" field.
+func (ac *ArticleCreate) SetSlug(s string) *ArticleCreate {
+	ac.mutation.SetSlug(s)
+	return ac
+}
+
 // SetTitle sets the "title" field.
 func (ac *ArticleCreate) SetTitle(s string) *ArticleCreate {
 	ac.mutation.SetTitle(s)
@@ -149,6 +155,14 @@ func (ac *ArticleCreate) defaults() {
 
 // check runs all checks and user-defined validators on the builder.
 func (ac *ArticleCreate) check() error {
+	if _, ok := ac.mutation.Slug(); !ok {
+		return &ValidationError{Name: "slug", err: errors.New(`ent: missing required field "Article.slug"`)}
+	}
+	if v, ok := ac.mutation.Slug(); ok {
+		if err := article.SlugValidator(v); err != nil {
+			return &ValidationError{Name: "slug", err: fmt.Errorf(`ent: validator failed for field "Article.slug": %w`, err)}
+		}
+	}
 	if _, ok := ac.mutation.Title(); !ok {
 		return &ValidationError{Name: "title", err: errors.New(`ent: missing required field "Article.title"`)}
 	}
@@ -250,6 +264,10 @@ func (ac *ArticleCreate) createSpec() (*Article, *sqlgraph.CreateSpec) {
 	if id, ok := ac.mutation.ID(); ok {
 		_node.ID = id
 		_spec.ID.Value = id
+	}
+	if value, ok := ac.mutation.Slug(); ok {
+		_spec.SetField(article.FieldSlug, field.TypeString, value)
+		_node.Slug = value
 	}
 	if value, ok := ac.mutation.Title(); ok {
 		_spec.SetField(article.FieldTitle, field.TypeString, value)

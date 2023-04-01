@@ -33,6 +33,7 @@ type ArticleMutation struct {
 	op                   Op
 	typ                  string
 	id                   *int
+	slug                 *string
 	title                *string
 	excerpt              *string
 	coverImage           *string
@@ -151,6 +152,42 @@ func (m *ArticleMutation) IDs(ctx context.Context) ([]int, error) {
 	default:
 		return nil, fmt.Errorf("IDs is not allowed on %s operations", m.op)
 	}
+}
+
+// SetSlug sets the "slug" field.
+func (m *ArticleMutation) SetSlug(s string) {
+	m.slug = &s
+}
+
+// Slug returns the value of the "slug" field in the mutation.
+func (m *ArticleMutation) Slug() (r string, exists bool) {
+	v := m.slug
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldSlug returns the old "slug" field's value of the Article entity.
+// If the Article object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ArticleMutation) OldSlug(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldSlug is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldSlug requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldSlug: %w", err)
+	}
+	return oldValue.Slug, nil
+}
+
+// ResetSlug resets all changes to the "slug" field.
+func (m *ArticleMutation) ResetSlug() {
+	m.slug = nil
 }
 
 // SetTitle sets the "title" field.
@@ -547,7 +584,10 @@ func (m *ArticleMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *ArticleMutation) Fields() []string {
-	fields := make([]string, 0, 10)
+	fields := make([]string, 0, 11)
+	if m.slug != nil {
+		fields = append(fields, article.FieldSlug)
+	}
 	if m.title != nil {
 		fields = append(fields, article.FieldTitle)
 	}
@@ -586,6 +626,8 @@ func (m *ArticleMutation) Fields() []string {
 // schema.
 func (m *ArticleMutation) Field(name string) (ent.Value, bool) {
 	switch name {
+	case article.FieldSlug:
+		return m.Slug()
 	case article.FieldTitle:
 		return m.Title()
 	case article.FieldExcerpt:
@@ -615,6 +657,8 @@ func (m *ArticleMutation) Field(name string) (ent.Value, bool) {
 // database failed.
 func (m *ArticleMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
+	case article.FieldSlug:
+		return m.OldSlug(ctx)
 	case article.FieldTitle:
 		return m.OldTitle(ctx)
 	case article.FieldExcerpt:
@@ -644,6 +688,13 @@ func (m *ArticleMutation) OldField(ctx context.Context, name string) (ent.Value,
 // type.
 func (m *ArticleMutation) SetField(name string, value ent.Value) error {
 	switch name {
+	case article.FieldSlug:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetSlug(v)
+		return nil
 	case article.FieldTitle:
 		v, ok := value.(string)
 		if !ok {
@@ -763,6 +814,9 @@ func (m *ArticleMutation) ClearField(name string) error {
 // It returns an error if the field is not defined in the schema.
 func (m *ArticleMutation) ResetField(name string) error {
 	switch name {
+	case article.FieldSlug:
+		m.ResetSlug()
+		return nil
 	case article.FieldTitle:
 		m.ResetTitle()
 		return nil

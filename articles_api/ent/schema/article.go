@@ -17,6 +17,8 @@ func (Article) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int("id").
 			StructTag(`json:"oid,omitempty"`),
+		field.Text("slug").
+			NotEmpty(),
 		field.Text("title").
 			NotEmpty(),
 		field.Text("excerpt").
