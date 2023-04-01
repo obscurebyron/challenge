@@ -210,6 +210,7 @@ Left to do
         * Obtaining help on some technical bits from colleagues.
         * Typing shortcuts.  Opted for weak typing where available (e.g. using text as the type for article date instead of time), which improved (initial) development speed at the cost of long-term development speed / maintainability / correctness.
         * Unable to spend any time considering possible injection attacks or really any other security vulnerabilities
+        * Minimal documentation
     * Delve into some time sinks: 
         * learning concepts, 
         * adjusting organization, 
