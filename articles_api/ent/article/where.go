@@ -59,6 +59,36 @@ func Title(v string) predicate.Article {
 	return predicate.Article(sql.FieldEQ(FieldTitle, v))
 }
 
+// Excerpt applies equality check predicate on the "excerpt" field. It's identical to ExcerptEQ.
+func Excerpt(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldExcerpt, v))
+}
+
+// CoverImage applies equality check predicate on the "coverImage" field. It's identical to CoverImageEQ.
+func CoverImage(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldCoverImage, v))
+}
+
+// Date applies equality check predicate on the "date" field. It's identical to DateEQ.
+func Date(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldDate, v))
+}
+
+// AuthorName applies equality check predicate on the "author_name" field. It's identical to AuthorNameEQ.
+func AuthorName(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldAuthorName, v))
+}
+
+// AuthorPictureURL applies equality check predicate on the "author_picture_url" field. It's identical to AuthorPictureURLEQ.
+func AuthorPictureURL(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldAuthorPictureURL, v))
+}
+
+// OpenGraphImageURL applies equality check predicate on the "open_graph_image_url" field. It's identical to OpenGraphImageURLEQ.
+func OpenGraphImageURL(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldOpenGraphImageURL, v))
+}
+
 // Content applies equality check predicate on the "content" field. It's identical to ContentEQ.
 func Content(v string) predicate.Article {
 	return predicate.Article(sql.FieldEQ(FieldContent, v))
@@ -137,6 +167,396 @@ func TitleEqualFold(v string) predicate.Article {
 // TitleContainsFold applies the ContainsFold predicate on the "title" field.
 func TitleContainsFold(v string) predicate.Article {
 	return predicate.Article(sql.FieldContainsFold(FieldTitle, v))
+}
+
+// ExcerptEQ applies the EQ predicate on the "excerpt" field.
+func ExcerptEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldExcerpt, v))
+}
+
+// ExcerptNEQ applies the NEQ predicate on the "excerpt" field.
+func ExcerptNEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldNEQ(FieldExcerpt, v))
+}
+
+// ExcerptIn applies the In predicate on the "excerpt" field.
+func ExcerptIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldIn(FieldExcerpt, vs...))
+}
+
+// ExcerptNotIn applies the NotIn predicate on the "excerpt" field.
+func ExcerptNotIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldNotIn(FieldExcerpt, vs...))
+}
+
+// ExcerptGT applies the GT predicate on the "excerpt" field.
+func ExcerptGT(v string) predicate.Article {
+	return predicate.Article(sql.FieldGT(FieldExcerpt, v))
+}
+
+// ExcerptGTE applies the GTE predicate on the "excerpt" field.
+func ExcerptGTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldGTE(FieldExcerpt, v))
+}
+
+// ExcerptLT applies the LT predicate on the "excerpt" field.
+func ExcerptLT(v string) predicate.Article {
+	return predicate.Article(sql.FieldLT(FieldExcerpt, v))
+}
+
+// ExcerptLTE applies the LTE predicate on the "excerpt" field.
+func ExcerptLTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldLTE(FieldExcerpt, v))
+}
+
+// ExcerptContains applies the Contains predicate on the "excerpt" field.
+func ExcerptContains(v string) predicate.Article {
+	return predicate.Article(sql.FieldContains(FieldExcerpt, v))
+}
+
+// ExcerptHasPrefix applies the HasPrefix predicate on the "excerpt" field.
+func ExcerptHasPrefix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasPrefix(FieldExcerpt, v))
+}
+
+// ExcerptHasSuffix applies the HasSuffix predicate on the "excerpt" field.
+func ExcerptHasSuffix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasSuffix(FieldExcerpt, v))
+}
+
+// ExcerptEqualFold applies the EqualFold predicate on the "excerpt" field.
+func ExcerptEqualFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldEqualFold(FieldExcerpt, v))
+}
+
+// ExcerptContainsFold applies the ContainsFold predicate on the "excerpt" field.
+func ExcerptContainsFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldContainsFold(FieldExcerpt, v))
+}
+
+// CoverImageEQ applies the EQ predicate on the "coverImage" field.
+func CoverImageEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldCoverImage, v))
+}
+
+// CoverImageNEQ applies the NEQ predicate on the "coverImage" field.
+func CoverImageNEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldNEQ(FieldCoverImage, v))
+}
+
+// CoverImageIn applies the In predicate on the "coverImage" field.
+func CoverImageIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldIn(FieldCoverImage, vs...))
+}
+
+// CoverImageNotIn applies the NotIn predicate on the "coverImage" field.
+func CoverImageNotIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldNotIn(FieldCoverImage, vs...))
+}
+
+// CoverImageGT applies the GT predicate on the "coverImage" field.
+func CoverImageGT(v string) predicate.Article {
+	return predicate.Article(sql.FieldGT(FieldCoverImage, v))
+}
+
+// CoverImageGTE applies the GTE predicate on the "coverImage" field.
+func CoverImageGTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldGTE(FieldCoverImage, v))
+}
+
+// CoverImageLT applies the LT predicate on the "coverImage" field.
+func CoverImageLT(v string) predicate.Article {
+	return predicate.Article(sql.FieldLT(FieldCoverImage, v))
+}
+
+// CoverImageLTE applies the LTE predicate on the "coverImage" field.
+func CoverImageLTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldLTE(FieldCoverImage, v))
+}
+
+// CoverImageContains applies the Contains predicate on the "coverImage" field.
+func CoverImageContains(v string) predicate.Article {
+	return predicate.Article(sql.FieldContains(FieldCoverImage, v))
+}
+
+// CoverImageHasPrefix applies the HasPrefix predicate on the "coverImage" field.
+func CoverImageHasPrefix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasPrefix(FieldCoverImage, v))
+}
+
+// CoverImageHasSuffix applies the HasSuffix predicate on the "coverImage" field.
+func CoverImageHasSuffix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasSuffix(FieldCoverImage, v))
+}
+
+// CoverImageEqualFold applies the EqualFold predicate on the "coverImage" field.
+func CoverImageEqualFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldEqualFold(FieldCoverImage, v))
+}
+
+// CoverImageContainsFold applies the ContainsFold predicate on the "coverImage" field.
+func CoverImageContainsFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldContainsFold(FieldCoverImage, v))
+}
+
+// DateEQ applies the EQ predicate on the "date" field.
+func DateEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldDate, v))
+}
+
+// DateNEQ applies the NEQ predicate on the "date" field.
+func DateNEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldNEQ(FieldDate, v))
+}
+
+// DateIn applies the In predicate on the "date" field.
+func DateIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldIn(FieldDate, vs...))
+}
+
+// DateNotIn applies the NotIn predicate on the "date" field.
+func DateNotIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldNotIn(FieldDate, vs...))
+}
+
+// DateGT applies the GT predicate on the "date" field.
+func DateGT(v string) predicate.Article {
+	return predicate.Article(sql.FieldGT(FieldDate, v))
+}
+
+// DateGTE applies the GTE predicate on the "date" field.
+func DateGTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldGTE(FieldDate, v))
+}
+
+// DateLT applies the LT predicate on the "date" field.
+func DateLT(v string) predicate.Article {
+	return predicate.Article(sql.FieldLT(FieldDate, v))
+}
+
+// DateLTE applies the LTE predicate on the "date" field.
+func DateLTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldLTE(FieldDate, v))
+}
+
+// DateContains applies the Contains predicate on the "date" field.
+func DateContains(v string) predicate.Article {
+	return predicate.Article(sql.FieldContains(FieldDate, v))
+}
+
+// DateHasPrefix applies the HasPrefix predicate on the "date" field.
+func DateHasPrefix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasPrefix(FieldDate, v))
+}
+
+// DateHasSuffix applies the HasSuffix predicate on the "date" field.
+func DateHasSuffix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasSuffix(FieldDate, v))
+}
+
+// DateEqualFold applies the EqualFold predicate on the "date" field.
+func DateEqualFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldEqualFold(FieldDate, v))
+}
+
+// DateContainsFold applies the ContainsFold predicate on the "date" field.
+func DateContainsFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldContainsFold(FieldDate, v))
+}
+
+// AuthorNameEQ applies the EQ predicate on the "author_name" field.
+func AuthorNameEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldAuthorName, v))
+}
+
+// AuthorNameNEQ applies the NEQ predicate on the "author_name" field.
+func AuthorNameNEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldNEQ(FieldAuthorName, v))
+}
+
+// AuthorNameIn applies the In predicate on the "author_name" field.
+func AuthorNameIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldIn(FieldAuthorName, vs...))
+}
+
+// AuthorNameNotIn applies the NotIn predicate on the "author_name" field.
+func AuthorNameNotIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldNotIn(FieldAuthorName, vs...))
+}
+
+// AuthorNameGT applies the GT predicate on the "author_name" field.
+func AuthorNameGT(v string) predicate.Article {
+	return predicate.Article(sql.FieldGT(FieldAuthorName, v))
+}
+
+// AuthorNameGTE applies the GTE predicate on the "author_name" field.
+func AuthorNameGTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldGTE(FieldAuthorName, v))
+}
+
+// AuthorNameLT applies the LT predicate on the "author_name" field.
+func AuthorNameLT(v string) predicate.Article {
+	return predicate.Article(sql.FieldLT(FieldAuthorName, v))
+}
+
+// AuthorNameLTE applies the LTE predicate on the "author_name" field.
+func AuthorNameLTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldLTE(FieldAuthorName, v))
+}
+
+// AuthorNameContains applies the Contains predicate on the "author_name" field.
+func AuthorNameContains(v string) predicate.Article {
+	return predicate.Article(sql.FieldContains(FieldAuthorName, v))
+}
+
+// AuthorNameHasPrefix applies the HasPrefix predicate on the "author_name" field.
+func AuthorNameHasPrefix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasPrefix(FieldAuthorName, v))
+}
+
+// AuthorNameHasSuffix applies the HasSuffix predicate on the "author_name" field.
+func AuthorNameHasSuffix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasSuffix(FieldAuthorName, v))
+}
+
+// AuthorNameEqualFold applies the EqualFold predicate on the "author_name" field.
+func AuthorNameEqualFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldEqualFold(FieldAuthorName, v))
+}
+
+// AuthorNameContainsFold applies the ContainsFold predicate on the "author_name" field.
+func AuthorNameContainsFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldContainsFold(FieldAuthorName, v))
+}
+
+// AuthorPictureURLEQ applies the EQ predicate on the "author_picture_url" field.
+func AuthorPictureURLEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLNEQ applies the NEQ predicate on the "author_picture_url" field.
+func AuthorPictureURLNEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldNEQ(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLIn applies the In predicate on the "author_picture_url" field.
+func AuthorPictureURLIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldIn(FieldAuthorPictureURL, vs...))
+}
+
+// AuthorPictureURLNotIn applies the NotIn predicate on the "author_picture_url" field.
+func AuthorPictureURLNotIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldNotIn(FieldAuthorPictureURL, vs...))
+}
+
+// AuthorPictureURLGT applies the GT predicate on the "author_picture_url" field.
+func AuthorPictureURLGT(v string) predicate.Article {
+	return predicate.Article(sql.FieldGT(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLGTE applies the GTE predicate on the "author_picture_url" field.
+func AuthorPictureURLGTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldGTE(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLLT applies the LT predicate on the "author_picture_url" field.
+func AuthorPictureURLLT(v string) predicate.Article {
+	return predicate.Article(sql.FieldLT(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLLTE applies the LTE predicate on the "author_picture_url" field.
+func AuthorPictureURLLTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldLTE(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLContains applies the Contains predicate on the "author_picture_url" field.
+func AuthorPictureURLContains(v string) predicate.Article {
+	return predicate.Article(sql.FieldContains(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLHasPrefix applies the HasPrefix predicate on the "author_picture_url" field.
+func AuthorPictureURLHasPrefix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasPrefix(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLHasSuffix applies the HasSuffix predicate on the "author_picture_url" field.
+func AuthorPictureURLHasSuffix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasSuffix(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLEqualFold applies the EqualFold predicate on the "author_picture_url" field.
+func AuthorPictureURLEqualFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldEqualFold(FieldAuthorPictureURL, v))
+}
+
+// AuthorPictureURLContainsFold applies the ContainsFold predicate on the "author_picture_url" field.
+func AuthorPictureURLContainsFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldContainsFold(FieldAuthorPictureURL, v))
+}
+
+// OpenGraphImageURLEQ applies the EQ predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldEQ(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLNEQ applies the NEQ predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLNEQ(v string) predicate.Article {
+	return predicate.Article(sql.FieldNEQ(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLIn applies the In predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldIn(FieldOpenGraphImageURL, vs...))
+}
+
+// OpenGraphImageURLNotIn applies the NotIn predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLNotIn(vs ...string) predicate.Article {
+	return predicate.Article(sql.FieldNotIn(FieldOpenGraphImageURL, vs...))
+}
+
+// OpenGraphImageURLGT applies the GT predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLGT(v string) predicate.Article {
+	return predicate.Article(sql.FieldGT(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLGTE applies the GTE predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLGTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldGTE(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLLT applies the LT predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLLT(v string) predicate.Article {
+	return predicate.Article(sql.FieldLT(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLLTE applies the LTE predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLLTE(v string) predicate.Article {
+	return predicate.Article(sql.FieldLTE(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLContains applies the Contains predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLContains(v string) predicate.Article {
+	return predicate.Article(sql.FieldContains(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLHasPrefix applies the HasPrefix predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLHasPrefix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasPrefix(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLHasSuffix applies the HasSuffix predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLHasSuffix(v string) predicate.Article {
+	return predicate.Article(sql.FieldHasSuffix(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLEqualFold applies the EqualFold predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLEqualFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldEqualFold(FieldOpenGraphImageURL, v))
+}
+
+// OpenGraphImageURLContainsFold applies the ContainsFold predicate on the "open_graph_image_url" field.
+func OpenGraphImageURLContainsFold(v string) predicate.Article {
+	return predicate.Article(sql.FieldContainsFold(FieldOpenGraphImageURL, v))
 }
 
 // ContentEQ applies the EQ predicate on the "content" field.

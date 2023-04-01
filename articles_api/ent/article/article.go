@@ -13,6 +13,18 @@ const (
 	FieldID = "id"
 	// FieldTitle holds the string denoting the title field in the database.
 	FieldTitle = "title"
+	// FieldExcerpt holds the string denoting the excerpt field in the database.
+	FieldExcerpt = "excerpt"
+	// FieldCoverImage holds the string denoting the coverimage field in the database.
+	FieldCoverImage = "cover_image"
+	// FieldDate holds the string denoting the date field in the database.
+	FieldDate = "date"
+	// FieldAuthorName holds the string denoting the author_name field in the database.
+	FieldAuthorName = "author_name"
+	// FieldAuthorPictureURL holds the string denoting the author_picture_url field in the database.
+	FieldAuthorPictureURL = "author_picture_url"
+	// FieldOpenGraphImageURL holds the string denoting the open_graph_image_url field in the database.
+	FieldOpenGraphImageURL = "open_graph_image_url"
 	// FieldContent holds the string denoting the content field in the database.
 	FieldContent = "content"
 	// FieldCreatedAt holds the string denoting the created_at field in the database.
@@ -27,6 +39,12 @@ const (
 var Columns = []string{
 	FieldID,
 	FieldTitle,
+	FieldExcerpt,
+	FieldCoverImage,
+	FieldDate,
+	FieldAuthorName,
+	FieldAuthorPictureURL,
+	FieldOpenGraphImageURL,
 	FieldContent,
 	FieldCreatedAt,
 	FieldUpdatedAt,
@@ -45,6 +63,18 @@ func ValidColumn(column string) bool {
 var (
 	// TitleValidator is a validator for the "title" field. It is called by the builders before save.
 	TitleValidator func(string) error
+	// ExcerptValidator is a validator for the "excerpt" field. It is called by the builders before save.
+	ExcerptValidator func(string) error
+	// CoverImageValidator is a validator for the "coverImage" field. It is called by the builders before save.
+	CoverImageValidator func(string) error
+	// DateValidator is a validator for the "date" field. It is called by the builders before save.
+	DateValidator func(string) error
+	// AuthorNameValidator is a validator for the "author_name" field. It is called by the builders before save.
+	AuthorNameValidator func(string) error
+	// AuthorPictureURLValidator is a validator for the "author_picture_url" field. It is called by the builders before save.
+	AuthorPictureURLValidator func(string) error
+	// OpenGraphImageURLValidator is a validator for the "open_graph_image_url" field. It is called by the builders before save.
+	OpenGraphImageURLValidator func(string) error
 	// ContentValidator is a validator for the "content" field. It is called by the builders before save.
 	ContentValidator func(string) error
 	// DefaultCreatedAt holds the default value on creation for the "created_at" field.

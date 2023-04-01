@@ -34,6 +34,42 @@ func (au *ArticleUpdate) SetTitle(s string) *ArticleUpdate {
 	return au
 }
 
+// SetExcerpt sets the "excerpt" field.
+func (au *ArticleUpdate) SetExcerpt(s string) *ArticleUpdate {
+	au.mutation.SetExcerpt(s)
+	return au
+}
+
+// SetCoverImage sets the "coverImage" field.
+func (au *ArticleUpdate) SetCoverImage(s string) *ArticleUpdate {
+	au.mutation.SetCoverImage(s)
+	return au
+}
+
+// SetDate sets the "date" field.
+func (au *ArticleUpdate) SetDate(s string) *ArticleUpdate {
+	au.mutation.SetDate(s)
+	return au
+}
+
+// SetAuthorName sets the "author_name" field.
+func (au *ArticleUpdate) SetAuthorName(s string) *ArticleUpdate {
+	au.mutation.SetAuthorName(s)
+	return au
+}
+
+// SetAuthorPictureURL sets the "author_picture_url" field.
+func (au *ArticleUpdate) SetAuthorPictureURL(s string) *ArticleUpdate {
+	au.mutation.SetAuthorPictureURL(s)
+	return au
+}
+
+// SetOpenGraphImageURL sets the "open_graph_image_url" field.
+func (au *ArticleUpdate) SetOpenGraphImageURL(s string) *ArticleUpdate {
+	au.mutation.SetOpenGraphImageURL(s)
+	return au
+}
+
 // SetContent sets the "content" field.
 func (au *ArticleUpdate) SetContent(s string) *ArticleUpdate {
 	au.mutation.SetContent(s)
@@ -93,6 +129,36 @@ func (au *ArticleUpdate) check() error {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
 		}
 	}
+	if v, ok := au.mutation.Excerpt(); ok {
+		if err := article.ExcerptValidator(v); err != nil {
+			return &ValidationError{Name: "excerpt", err: fmt.Errorf(`ent: validator failed for field "Article.excerpt": %w`, err)}
+		}
+	}
+	if v, ok := au.mutation.CoverImage(); ok {
+		if err := article.CoverImageValidator(v); err != nil {
+			return &ValidationError{Name: "coverImage", err: fmt.Errorf(`ent: validator failed for field "Article.coverImage": %w`, err)}
+		}
+	}
+	if v, ok := au.mutation.Date(); ok {
+		if err := article.DateValidator(v); err != nil {
+			return &ValidationError{Name: "date", err: fmt.Errorf(`ent: validator failed for field "Article.date": %w`, err)}
+		}
+	}
+	if v, ok := au.mutation.AuthorName(); ok {
+		if err := article.AuthorNameValidator(v); err != nil {
+			return &ValidationError{Name: "author_name", err: fmt.Errorf(`ent: validator failed for field "Article.author_name": %w`, err)}
+		}
+	}
+	if v, ok := au.mutation.AuthorPictureURL(); ok {
+		if err := article.AuthorPictureURLValidator(v); err != nil {
+			return &ValidationError{Name: "author_picture_url", err: fmt.Errorf(`ent: validator failed for field "Article.author_picture_url": %w`, err)}
+		}
+	}
+	if v, ok := au.mutation.OpenGraphImageURL(); ok {
+		if err := article.OpenGraphImageURLValidator(v); err != nil {
+			return &ValidationError{Name: "open_graph_image_url", err: fmt.Errorf(`ent: validator failed for field "Article.open_graph_image_url": %w`, err)}
+		}
+	}
 	if v, ok := au.mutation.Content(); ok {
 		if err := article.ContentValidator(v); err != nil {
 			return &ValidationError{Name: "content", err: fmt.Errorf(`ent: validator failed for field "Article.content": %w`, err)}
@@ -115,6 +181,24 @@ func (au *ArticleUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := au.mutation.Title(); ok {
 		_spec.SetField(article.FieldTitle, field.TypeString, value)
+	}
+	if value, ok := au.mutation.Excerpt(); ok {
+		_spec.SetField(article.FieldExcerpt, field.TypeString, value)
+	}
+	if value, ok := au.mutation.CoverImage(); ok {
+		_spec.SetField(article.FieldCoverImage, field.TypeString, value)
+	}
+	if value, ok := au.mutation.Date(); ok {
+		_spec.SetField(article.FieldDate, field.TypeString, value)
+	}
+	if value, ok := au.mutation.AuthorName(); ok {
+		_spec.SetField(article.FieldAuthorName, field.TypeString, value)
+	}
+	if value, ok := au.mutation.AuthorPictureURL(); ok {
+		_spec.SetField(article.FieldAuthorPictureURL, field.TypeString, value)
+	}
+	if value, ok := au.mutation.OpenGraphImageURL(); ok {
+		_spec.SetField(article.FieldOpenGraphImageURL, field.TypeString, value)
 	}
 	if value, ok := au.mutation.Content(); ok {
 		_spec.SetField(article.FieldContent, field.TypeString, value)
@@ -145,6 +229,42 @@ type ArticleUpdateOne struct {
 // SetTitle sets the "title" field.
 func (auo *ArticleUpdateOne) SetTitle(s string) *ArticleUpdateOne {
 	auo.mutation.SetTitle(s)
+	return auo
+}
+
+// SetExcerpt sets the "excerpt" field.
+func (auo *ArticleUpdateOne) SetExcerpt(s string) *ArticleUpdateOne {
+	auo.mutation.SetExcerpt(s)
+	return auo
+}
+
+// SetCoverImage sets the "coverImage" field.
+func (auo *ArticleUpdateOne) SetCoverImage(s string) *ArticleUpdateOne {
+	auo.mutation.SetCoverImage(s)
+	return auo
+}
+
+// SetDate sets the "date" field.
+func (auo *ArticleUpdateOne) SetDate(s string) *ArticleUpdateOne {
+	auo.mutation.SetDate(s)
+	return auo
+}
+
+// SetAuthorName sets the "author_name" field.
+func (auo *ArticleUpdateOne) SetAuthorName(s string) *ArticleUpdateOne {
+	auo.mutation.SetAuthorName(s)
+	return auo
+}
+
+// SetAuthorPictureURL sets the "author_picture_url" field.
+func (auo *ArticleUpdateOne) SetAuthorPictureURL(s string) *ArticleUpdateOne {
+	auo.mutation.SetAuthorPictureURL(s)
+	return auo
+}
+
+// SetOpenGraphImageURL sets the "open_graph_image_url" field.
+func (auo *ArticleUpdateOne) SetOpenGraphImageURL(s string) *ArticleUpdateOne {
+	auo.mutation.SetOpenGraphImageURL(s)
 	return auo
 }
 
@@ -220,6 +340,36 @@ func (auo *ArticleUpdateOne) check() error {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
 		}
 	}
+	if v, ok := auo.mutation.Excerpt(); ok {
+		if err := article.ExcerptValidator(v); err != nil {
+			return &ValidationError{Name: "excerpt", err: fmt.Errorf(`ent: validator failed for field "Article.excerpt": %w`, err)}
+		}
+	}
+	if v, ok := auo.mutation.CoverImage(); ok {
+		if err := article.CoverImageValidator(v); err != nil {
+			return &ValidationError{Name: "coverImage", err: fmt.Errorf(`ent: validator failed for field "Article.coverImage": %w`, err)}
+		}
+	}
+	if v, ok := auo.mutation.Date(); ok {
+		if err := article.DateValidator(v); err != nil {
+			return &ValidationError{Name: "date", err: fmt.Errorf(`ent: validator failed for field "Article.date": %w`, err)}
+		}
+	}
+	if v, ok := auo.mutation.AuthorName(); ok {
+		if err := article.AuthorNameValidator(v); err != nil {
+			return &ValidationError{Name: "author_name", err: fmt.Errorf(`ent: validator failed for field "Article.author_name": %w`, err)}
+		}
+	}
+	if v, ok := auo.mutation.AuthorPictureURL(); ok {
+		if err := article.AuthorPictureURLValidator(v); err != nil {
+			return &ValidationError{Name: "author_picture_url", err: fmt.Errorf(`ent: validator failed for field "Article.author_picture_url": %w`, err)}
+		}
+	}
+	if v, ok := auo.mutation.OpenGraphImageURL(); ok {
+		if err := article.OpenGraphImageURLValidator(v); err != nil {
+			return &ValidationError{Name: "open_graph_image_url", err: fmt.Errorf(`ent: validator failed for field "Article.open_graph_image_url": %w`, err)}
+		}
+	}
 	if v, ok := auo.mutation.Content(); ok {
 		if err := article.ContentValidator(v); err != nil {
 			return &ValidationError{Name: "content", err: fmt.Errorf(`ent: validator failed for field "Article.content": %w`, err)}
@@ -259,6 +409,24 @@ func (auo *ArticleUpdateOne) sqlSave(ctx context.Context) (_node *Article, err e
 	}
 	if value, ok := auo.mutation.Title(); ok {
 		_spec.SetField(article.FieldTitle, field.TypeString, value)
+	}
+	if value, ok := auo.mutation.Excerpt(); ok {
+		_spec.SetField(article.FieldExcerpt, field.TypeString, value)
+	}
+	if value, ok := auo.mutation.CoverImage(); ok {
+		_spec.SetField(article.FieldCoverImage, field.TypeString, value)
+	}
+	if value, ok := auo.mutation.Date(); ok {
+		_spec.SetField(article.FieldDate, field.TypeString, value)
+	}
+	if value, ok := auo.mutation.AuthorName(); ok {
+		_spec.SetField(article.FieldAuthorName, field.TypeString, value)
+	}
+	if value, ok := auo.mutation.AuthorPictureURL(); ok {
+		_spec.SetField(article.FieldAuthorPictureURL, field.TypeString, value)
+	}
+	if value, ok := auo.mutation.OpenGraphImageURL(); ok {
+		_spec.SetField(article.FieldOpenGraphImageURL, field.TypeString, value)
 	}
 	if value, ok := auo.mutation.Content(); ok {
 		_spec.SetField(article.FieldContent, field.TypeString, value)

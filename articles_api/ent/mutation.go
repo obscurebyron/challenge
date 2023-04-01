@@ -30,17 +30,23 @@ const (
 // ArticleMutation represents an operation that mutates the Article nodes in the graph.
 type ArticleMutation struct {
 	config
-	op            Op
-	typ           string
-	id            *int
-	title         *string
-	content       *string
-	created_at    *time.Time
-	updated_at    *time.Time
-	clearedFields map[string]struct{}
-	done          bool
-	oldValue      func(context.Context) (*Article, error)
-	predicates    []predicate.Article
+	op                   Op
+	typ                  string
+	id                   *int
+	title                *string
+	excerpt              *string
+	coverImage           *string
+	date                 *string
+	author_name          *string
+	author_picture_url   *string
+	open_graph_image_url *string
+	content              *string
+	created_at           *time.Time
+	updated_at           *time.Time
+	clearedFields        map[string]struct{}
+	done                 bool
+	oldValue             func(context.Context) (*Article, error)
+	predicates           []predicate.Article
 }
 
 var _ ent.Mutation = (*ArticleMutation)(nil)
@@ -181,6 +187,222 @@ func (m *ArticleMutation) OldTitle(ctx context.Context) (v string, err error) {
 // ResetTitle resets all changes to the "title" field.
 func (m *ArticleMutation) ResetTitle() {
 	m.title = nil
+}
+
+// SetExcerpt sets the "excerpt" field.
+func (m *ArticleMutation) SetExcerpt(s string) {
+	m.excerpt = &s
+}
+
+// Excerpt returns the value of the "excerpt" field in the mutation.
+func (m *ArticleMutation) Excerpt() (r string, exists bool) {
+	v := m.excerpt
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldExcerpt returns the old "excerpt" field's value of the Article entity.
+// If the Article object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ArticleMutation) OldExcerpt(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldExcerpt is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldExcerpt requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldExcerpt: %w", err)
+	}
+	return oldValue.Excerpt, nil
+}
+
+// ResetExcerpt resets all changes to the "excerpt" field.
+func (m *ArticleMutation) ResetExcerpt() {
+	m.excerpt = nil
+}
+
+// SetCoverImage sets the "coverImage" field.
+func (m *ArticleMutation) SetCoverImage(s string) {
+	m.coverImage = &s
+}
+
+// CoverImage returns the value of the "coverImage" field in the mutation.
+func (m *ArticleMutation) CoverImage() (r string, exists bool) {
+	v := m.coverImage
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCoverImage returns the old "coverImage" field's value of the Article entity.
+// If the Article object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ArticleMutation) OldCoverImage(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCoverImage is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCoverImage requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCoverImage: %w", err)
+	}
+	return oldValue.CoverImage, nil
+}
+
+// ResetCoverImage resets all changes to the "coverImage" field.
+func (m *ArticleMutation) ResetCoverImage() {
+	m.coverImage = nil
+}
+
+// SetDate sets the "date" field.
+func (m *ArticleMutation) SetDate(s string) {
+	m.date = &s
+}
+
+// Date returns the value of the "date" field in the mutation.
+func (m *ArticleMutation) Date() (r string, exists bool) {
+	v := m.date
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDate returns the old "date" field's value of the Article entity.
+// If the Article object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ArticleMutation) OldDate(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDate is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDate requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDate: %w", err)
+	}
+	return oldValue.Date, nil
+}
+
+// ResetDate resets all changes to the "date" field.
+func (m *ArticleMutation) ResetDate() {
+	m.date = nil
+}
+
+// SetAuthorName sets the "author_name" field.
+func (m *ArticleMutation) SetAuthorName(s string) {
+	m.author_name = &s
+}
+
+// AuthorName returns the value of the "author_name" field in the mutation.
+func (m *ArticleMutation) AuthorName() (r string, exists bool) {
+	v := m.author_name
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAuthorName returns the old "author_name" field's value of the Article entity.
+// If the Article object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ArticleMutation) OldAuthorName(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAuthorName is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAuthorName requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAuthorName: %w", err)
+	}
+	return oldValue.AuthorName, nil
+}
+
+// ResetAuthorName resets all changes to the "author_name" field.
+func (m *ArticleMutation) ResetAuthorName() {
+	m.author_name = nil
+}
+
+// SetAuthorPictureURL sets the "author_picture_url" field.
+func (m *ArticleMutation) SetAuthorPictureURL(s string) {
+	m.author_picture_url = &s
+}
+
+// AuthorPictureURL returns the value of the "author_picture_url" field in the mutation.
+func (m *ArticleMutation) AuthorPictureURL() (r string, exists bool) {
+	v := m.author_picture_url
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAuthorPictureURL returns the old "author_picture_url" field's value of the Article entity.
+// If the Article object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ArticleMutation) OldAuthorPictureURL(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAuthorPictureURL is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAuthorPictureURL requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAuthorPictureURL: %w", err)
+	}
+	return oldValue.AuthorPictureURL, nil
+}
+
+// ResetAuthorPictureURL resets all changes to the "author_picture_url" field.
+func (m *ArticleMutation) ResetAuthorPictureURL() {
+	m.author_picture_url = nil
+}
+
+// SetOpenGraphImageURL sets the "open_graph_image_url" field.
+func (m *ArticleMutation) SetOpenGraphImageURL(s string) {
+	m.open_graph_image_url = &s
+}
+
+// OpenGraphImageURL returns the value of the "open_graph_image_url" field in the mutation.
+func (m *ArticleMutation) OpenGraphImageURL() (r string, exists bool) {
+	v := m.open_graph_image_url
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldOpenGraphImageURL returns the old "open_graph_image_url" field's value of the Article entity.
+// If the Article object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *ArticleMutation) OldOpenGraphImageURL(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldOpenGraphImageURL is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldOpenGraphImageURL requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldOpenGraphImageURL: %w", err)
+	}
+	return oldValue.OpenGraphImageURL, nil
+}
+
+// ResetOpenGraphImageURL resets all changes to the "open_graph_image_url" field.
+func (m *ArticleMutation) ResetOpenGraphImageURL() {
+	m.open_graph_image_url = nil
 }
 
 // SetContent sets the "content" field.
@@ -325,9 +547,27 @@ func (m *ArticleMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *ArticleMutation) Fields() []string {
-	fields := make([]string, 0, 4)
+	fields := make([]string, 0, 10)
 	if m.title != nil {
 		fields = append(fields, article.FieldTitle)
+	}
+	if m.excerpt != nil {
+		fields = append(fields, article.FieldExcerpt)
+	}
+	if m.coverImage != nil {
+		fields = append(fields, article.FieldCoverImage)
+	}
+	if m.date != nil {
+		fields = append(fields, article.FieldDate)
+	}
+	if m.author_name != nil {
+		fields = append(fields, article.FieldAuthorName)
+	}
+	if m.author_picture_url != nil {
+		fields = append(fields, article.FieldAuthorPictureURL)
+	}
+	if m.open_graph_image_url != nil {
+		fields = append(fields, article.FieldOpenGraphImageURL)
 	}
 	if m.content != nil {
 		fields = append(fields, article.FieldContent)
@@ -348,6 +588,18 @@ func (m *ArticleMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case article.FieldTitle:
 		return m.Title()
+	case article.FieldExcerpt:
+		return m.Excerpt()
+	case article.FieldCoverImage:
+		return m.CoverImage()
+	case article.FieldDate:
+		return m.Date()
+	case article.FieldAuthorName:
+		return m.AuthorName()
+	case article.FieldAuthorPictureURL:
+		return m.AuthorPictureURL()
+	case article.FieldOpenGraphImageURL:
+		return m.OpenGraphImageURL()
 	case article.FieldContent:
 		return m.Content()
 	case article.FieldCreatedAt:
@@ -365,6 +617,18 @@ func (m *ArticleMutation) OldField(ctx context.Context, name string) (ent.Value,
 	switch name {
 	case article.FieldTitle:
 		return m.OldTitle(ctx)
+	case article.FieldExcerpt:
+		return m.OldExcerpt(ctx)
+	case article.FieldCoverImage:
+		return m.OldCoverImage(ctx)
+	case article.FieldDate:
+		return m.OldDate(ctx)
+	case article.FieldAuthorName:
+		return m.OldAuthorName(ctx)
+	case article.FieldAuthorPictureURL:
+		return m.OldAuthorPictureURL(ctx)
+	case article.FieldOpenGraphImageURL:
+		return m.OldOpenGraphImageURL(ctx)
 	case article.FieldContent:
 		return m.OldContent(ctx)
 	case article.FieldCreatedAt:
@@ -386,6 +650,48 @@ func (m *ArticleMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetTitle(v)
+		return nil
+	case article.FieldExcerpt:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetExcerpt(v)
+		return nil
+	case article.FieldCoverImage:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCoverImage(v)
+		return nil
+	case article.FieldDate:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDate(v)
+		return nil
+	case article.FieldAuthorName:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAuthorName(v)
+		return nil
+	case article.FieldAuthorPictureURL:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAuthorPictureURL(v)
+		return nil
+	case article.FieldOpenGraphImageURL:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetOpenGraphImageURL(v)
 		return nil
 	case article.FieldContent:
 		v, ok := value.(string)
@@ -459,6 +765,24 @@ func (m *ArticleMutation) ResetField(name string) error {
 	switch name {
 	case article.FieldTitle:
 		m.ResetTitle()
+		return nil
+	case article.FieldExcerpt:
+		m.ResetExcerpt()
+		return nil
+	case article.FieldCoverImage:
+		m.ResetCoverImage()
+		return nil
+	case article.FieldDate:
+		m.ResetDate()
+		return nil
+	case article.FieldAuthorName:
+		m.ResetAuthorName()
+		return nil
+	case article.FieldAuthorPictureURL:
+		m.ResetAuthorPictureURL()
+		return nil
+	case article.FieldOpenGraphImageURL:
+		m.ResetOpenGraphImageURL()
 		return nil
 	case article.FieldContent:
 		m.ResetContent()

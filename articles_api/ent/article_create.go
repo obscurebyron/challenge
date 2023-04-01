@@ -26,6 +26,42 @@ func (ac *ArticleCreate) SetTitle(s string) *ArticleCreate {
 	return ac
 }
 
+// SetExcerpt sets the "excerpt" field.
+func (ac *ArticleCreate) SetExcerpt(s string) *ArticleCreate {
+	ac.mutation.SetExcerpt(s)
+	return ac
+}
+
+// SetCoverImage sets the "coverImage" field.
+func (ac *ArticleCreate) SetCoverImage(s string) *ArticleCreate {
+	ac.mutation.SetCoverImage(s)
+	return ac
+}
+
+// SetDate sets the "date" field.
+func (ac *ArticleCreate) SetDate(s string) *ArticleCreate {
+	ac.mutation.SetDate(s)
+	return ac
+}
+
+// SetAuthorName sets the "author_name" field.
+func (ac *ArticleCreate) SetAuthorName(s string) *ArticleCreate {
+	ac.mutation.SetAuthorName(s)
+	return ac
+}
+
+// SetAuthorPictureURL sets the "author_picture_url" field.
+func (ac *ArticleCreate) SetAuthorPictureURL(s string) *ArticleCreate {
+	ac.mutation.SetAuthorPictureURL(s)
+	return ac
+}
+
+// SetOpenGraphImageURL sets the "open_graph_image_url" field.
+func (ac *ArticleCreate) SetOpenGraphImageURL(s string) *ArticleCreate {
+	ac.mutation.SetOpenGraphImageURL(s)
+	return ac
+}
+
 // SetContent sets the "content" field.
 func (ac *ArticleCreate) SetContent(s string) *ArticleCreate {
 	ac.mutation.SetContent(s)
@@ -121,6 +157,54 @@ func (ac *ArticleCreate) check() error {
 			return &ValidationError{Name: "title", err: fmt.Errorf(`ent: validator failed for field "Article.title": %w`, err)}
 		}
 	}
+	if _, ok := ac.mutation.Excerpt(); !ok {
+		return &ValidationError{Name: "excerpt", err: errors.New(`ent: missing required field "Article.excerpt"`)}
+	}
+	if v, ok := ac.mutation.Excerpt(); ok {
+		if err := article.ExcerptValidator(v); err != nil {
+			return &ValidationError{Name: "excerpt", err: fmt.Errorf(`ent: validator failed for field "Article.excerpt": %w`, err)}
+		}
+	}
+	if _, ok := ac.mutation.CoverImage(); !ok {
+		return &ValidationError{Name: "coverImage", err: errors.New(`ent: missing required field "Article.coverImage"`)}
+	}
+	if v, ok := ac.mutation.CoverImage(); ok {
+		if err := article.CoverImageValidator(v); err != nil {
+			return &ValidationError{Name: "coverImage", err: fmt.Errorf(`ent: validator failed for field "Article.coverImage": %w`, err)}
+		}
+	}
+	if _, ok := ac.mutation.Date(); !ok {
+		return &ValidationError{Name: "date", err: errors.New(`ent: missing required field "Article.date"`)}
+	}
+	if v, ok := ac.mutation.Date(); ok {
+		if err := article.DateValidator(v); err != nil {
+			return &ValidationError{Name: "date", err: fmt.Errorf(`ent: validator failed for field "Article.date": %w`, err)}
+		}
+	}
+	if _, ok := ac.mutation.AuthorName(); !ok {
+		return &ValidationError{Name: "author_name", err: errors.New(`ent: missing required field "Article.author_name"`)}
+	}
+	if v, ok := ac.mutation.AuthorName(); ok {
+		if err := article.AuthorNameValidator(v); err != nil {
+			return &ValidationError{Name: "author_name", err: fmt.Errorf(`ent: validator failed for field "Article.author_name": %w`, err)}
+		}
+	}
+	if _, ok := ac.mutation.AuthorPictureURL(); !ok {
+		return &ValidationError{Name: "author_picture_url", err: errors.New(`ent: missing required field "Article.author_picture_url"`)}
+	}
+	if v, ok := ac.mutation.AuthorPictureURL(); ok {
+		if err := article.AuthorPictureURLValidator(v); err != nil {
+			return &ValidationError{Name: "author_picture_url", err: fmt.Errorf(`ent: validator failed for field "Article.author_picture_url": %w`, err)}
+		}
+	}
+	if _, ok := ac.mutation.OpenGraphImageURL(); !ok {
+		return &ValidationError{Name: "open_graph_image_url", err: errors.New(`ent: missing required field "Article.open_graph_image_url"`)}
+	}
+	if v, ok := ac.mutation.OpenGraphImageURL(); ok {
+		if err := article.OpenGraphImageURLValidator(v); err != nil {
+			return &ValidationError{Name: "open_graph_image_url", err: fmt.Errorf(`ent: validator failed for field "Article.open_graph_image_url": %w`, err)}
+		}
+	}
 	if _, ok := ac.mutation.Content(); !ok {
 		return &ValidationError{Name: "content", err: errors.New(`ent: missing required field "Article.content"`)}
 	}
@@ -170,6 +254,30 @@ func (ac *ArticleCreate) createSpec() (*Article, *sqlgraph.CreateSpec) {
 	if value, ok := ac.mutation.Title(); ok {
 		_spec.SetField(article.FieldTitle, field.TypeString, value)
 		_node.Title = value
+	}
+	if value, ok := ac.mutation.Excerpt(); ok {
+		_spec.SetField(article.FieldExcerpt, field.TypeString, value)
+		_node.Excerpt = value
+	}
+	if value, ok := ac.mutation.CoverImage(); ok {
+		_spec.SetField(article.FieldCoverImage, field.TypeString, value)
+		_node.CoverImage = value
+	}
+	if value, ok := ac.mutation.Date(); ok {
+		_spec.SetField(article.FieldDate, field.TypeString, value)
+		_node.Date = value
+	}
+	if value, ok := ac.mutation.AuthorName(); ok {
+		_spec.SetField(article.FieldAuthorName, field.TypeString, value)
+		_node.AuthorName = value
+	}
+	if value, ok := ac.mutation.AuthorPictureURL(); ok {
+		_spec.SetField(article.FieldAuthorPictureURL, field.TypeString, value)
+		_node.AuthorPictureURL = value
+	}
+	if value, ok := ac.mutation.OpenGraphImageURL(); ok {
+		_spec.SetField(article.FieldOpenGraphImageURL, field.TypeString, value)
+		_node.OpenGraphImageURL = value
 	}
 	if value, ok := ac.mutation.Content(); ok {
 		_spec.SetField(article.FieldContent, field.TypeString, value)

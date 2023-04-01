@@ -19,16 +19,40 @@ func init() {
 	articleDescTitle := articleFields[1].Descriptor()
 	// article.TitleValidator is a validator for the "title" field. It is called by the builders before save.
 	article.TitleValidator = articleDescTitle.Validators[0].(func(string) error)
+	// articleDescExcerpt is the schema descriptor for excerpt field.
+	articleDescExcerpt := articleFields[2].Descriptor()
+	// article.ExcerptValidator is a validator for the "excerpt" field. It is called by the builders before save.
+	article.ExcerptValidator = articleDescExcerpt.Validators[0].(func(string) error)
+	// articleDescCoverImage is the schema descriptor for coverImage field.
+	articleDescCoverImage := articleFields[3].Descriptor()
+	// article.CoverImageValidator is a validator for the "coverImage" field. It is called by the builders before save.
+	article.CoverImageValidator = articleDescCoverImage.Validators[0].(func(string) error)
+	// articleDescDate is the schema descriptor for date field.
+	articleDescDate := articleFields[4].Descriptor()
+	// article.DateValidator is a validator for the "date" field. It is called by the builders before save.
+	article.DateValidator = articleDescDate.Validators[0].(func(string) error)
+	// articleDescAuthorName is the schema descriptor for author_name field.
+	articleDescAuthorName := articleFields[5].Descriptor()
+	// article.AuthorNameValidator is a validator for the "author_name" field. It is called by the builders before save.
+	article.AuthorNameValidator = articleDescAuthorName.Validators[0].(func(string) error)
+	// articleDescAuthorPictureURL is the schema descriptor for author_picture_url field.
+	articleDescAuthorPictureURL := articleFields[6].Descriptor()
+	// article.AuthorPictureURLValidator is a validator for the "author_picture_url" field. It is called by the builders before save.
+	article.AuthorPictureURLValidator = articleDescAuthorPictureURL.Validators[0].(func(string) error)
+	// articleDescOpenGraphImageURL is the schema descriptor for open_graph_image_url field.
+	articleDescOpenGraphImageURL := articleFields[7].Descriptor()
+	// article.OpenGraphImageURLValidator is a validator for the "open_graph_image_url" field. It is called by the builders before save.
+	article.OpenGraphImageURLValidator = articleDescOpenGraphImageURL.Validators[0].(func(string) error)
 	// articleDescContent is the schema descriptor for content field.
-	articleDescContent := articleFields[2].Descriptor()
+	articleDescContent := articleFields[8].Descriptor()
 	// article.ContentValidator is a validator for the "content" field. It is called by the builders before save.
 	article.ContentValidator = articleDescContent.Validators[0].(func(string) error)
 	// articleDescCreatedAt is the schema descriptor for created_at field.
-	articleDescCreatedAt := articleFields[3].Descriptor()
+	articleDescCreatedAt := articleFields[9].Descriptor()
 	// article.DefaultCreatedAt holds the default value on creation for the created_at field.
 	article.DefaultCreatedAt = articleDescCreatedAt.Default.(func() time.Time)
 	// articleDescUpdatedAt is the schema descriptor for updated_at field.
-	articleDescUpdatedAt := articleFields[4].Descriptor()
+	articleDescUpdatedAt := articleFields[10].Descriptor()
 	// article.DefaultUpdatedAt holds the default value on creation for the updated_at field.
 	article.DefaultUpdatedAt = articleDescUpdatedAt.Default.(func() time.Time)
 }

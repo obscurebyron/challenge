@@ -18,6 +18,18 @@ type Article struct {
 	ID int `json:"oid,omitempty"`
 	// Title holds the value of the "title" field.
 	Title string `json:"title,omitempty"`
+	// Excerpt holds the value of the "excerpt" field.
+	Excerpt string `json:"excerpt,omitempty"`
+	// CoverImage holds the value of the "coverImage" field.
+	CoverImage string `json:"coverImage,omitempty"`
+	// Date holds the value of the "date" field.
+	Date string `json:"date,omitempty"`
+	// AuthorName holds the value of the "author_name" field.
+	AuthorName string `json:"author_name,omitempty"`
+	// AuthorPictureURL holds the value of the "author_picture_url" field.
+	AuthorPictureURL string `json:"author_picture_url,omitempty"`
+	// OpenGraphImageURL holds the value of the "open_graph_image_url" field.
+	OpenGraphImageURL string `json:"open_graph_image_url,omitempty"`
 	// Content holds the value of the "content" field.
 	Content string `json:"content,omitempty"`
 	// CreatedAt holds the value of the "created_at" field.
@@ -33,7 +45,7 @@ func (*Article) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case article.FieldID:
 			values[i] = new(sql.NullInt64)
-		case article.FieldTitle, article.FieldContent:
+		case article.FieldTitle, article.FieldExcerpt, article.FieldCoverImage, article.FieldDate, article.FieldAuthorName, article.FieldAuthorPictureURL, article.FieldOpenGraphImageURL, article.FieldContent:
 			values[i] = new(sql.NullString)
 		case article.FieldCreatedAt, article.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
@@ -63,6 +75,42 @@ func (a *Article) assignValues(columns []string, values []any) error {
 				return fmt.Errorf("unexpected type %T for field title", values[i])
 			} else if value.Valid {
 				a.Title = value.String
+			}
+		case article.FieldExcerpt:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field excerpt", values[i])
+			} else if value.Valid {
+				a.Excerpt = value.String
+			}
+		case article.FieldCoverImage:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field coverImage", values[i])
+			} else if value.Valid {
+				a.CoverImage = value.String
+			}
+		case article.FieldDate:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field date", values[i])
+			} else if value.Valid {
+				a.Date = value.String
+			}
+		case article.FieldAuthorName:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field author_name", values[i])
+			} else if value.Valid {
+				a.AuthorName = value.String
+			}
+		case article.FieldAuthorPictureURL:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field author_picture_url", values[i])
+			} else if value.Valid {
+				a.AuthorPictureURL = value.String
+			}
+		case article.FieldOpenGraphImageURL:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field open_graph_image_url", values[i])
+			} else if value.Valid {
+				a.OpenGraphImageURL = value.String
 			}
 		case article.FieldContent:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -112,6 +160,24 @@ func (a *Article) String() string {
 	builder.WriteString(fmt.Sprintf("id=%v, ", a.ID))
 	builder.WriteString("title=")
 	builder.WriteString(a.Title)
+	builder.WriteString(", ")
+	builder.WriteString("excerpt=")
+	builder.WriteString(a.Excerpt)
+	builder.WriteString(", ")
+	builder.WriteString("coverImage=")
+	builder.WriteString(a.CoverImage)
+	builder.WriteString(", ")
+	builder.WriteString("date=")
+	builder.WriteString(a.Date)
+	builder.WriteString(", ")
+	builder.WriteString("author_name=")
+	builder.WriteString(a.AuthorName)
+	builder.WriteString(", ")
+	builder.WriteString("author_picture_url=")
+	builder.WriteString(a.AuthorPictureURL)
+	builder.WriteString(", ")
+	builder.WriteString("open_graph_image_url=")
+	builder.WriteString(a.OpenGraphImageURL)
 	builder.WriteString(", ")
 	builder.WriteString("content=")
 	builder.WriteString(a.Content)

@@ -19,6 +19,18 @@ func (Article) Fields() []ent.Field {
 			StructTag(`json:"oid,omitempty"`),
 		field.Text("title").
 			NotEmpty(),
+		field.Text("excerpt").
+			NotEmpty(),
+		field.Text("coverImage").
+			NotEmpty(),
+		field.Text("date").
+			NotEmpty(),
+		field.Text("author_name").
+			NotEmpty(),
+		field.Text("author_picture_url").
+			NotEmpty(),	
+		field.Text("open_graph_image_url").
+			NotEmpty(),
 		field.Text("content").
 			NotEmpty(),
 		field.Time("created_at").
