@@ -233,6 +233,8 @@ Left to do
                 * NextJS: new
                 * Tailwind: new
                 * ReactJS: moderate
+            * Tools:
+                * Trivy: new
             * concepts: 
                 * SLSA level 3: new
                 * programmer competency matrix: new
