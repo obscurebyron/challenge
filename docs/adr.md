@@ -158,3 +158,81 @@ MVP interfaces
 * Comments API
     * create comment (related URL [article or comment] - linked list?)
     * get comments (related URL) -> list of comments
+
+
+Left to do
+----------
+
+* wireup between frontend and articles backend
+    * receive blogs from backend database
+    * schema for blogs in postgres database
+    * types for blogs in backend
+    * database migration in backend
+    * how to record favorability for an article?
+* wireup between frontend and auth backend
+    * login should return with a setCookie that the frontend can use to determine auth
+    * (secondary) if auth'd, ability to mark favorability ("like/dislike") on an article
+* orchestration of system startup, in chronological order:
+    1. databases - heartbeats for each
+    2. api's
+    3. front-end
+    4. ingress
+* testing 
+    * can be done in one shot as a Playwright test - a single register/login/"like" an article should exercise all parts.  Minimal tests for maximum value.
+    * microservice needs:
+        * frontend - jest unit tests for components (does not connect to backends)
+        * auth - api tests with mocked data
+        * article - api tests with mocked data
+* linting for each microservice  
+    * frontend (typescript)
+    * auth (go)
+    * articles (python)
+* register to have sonarcloud connected to the project, have it run each time
+* SBOM - isn't that already handled?
+    * frontend - package-lock.json
+    * auth - requirements.txt
+    * articles - go.mod
+* Trivy - available as a Docker image.  Involved during CI/CD
+* CI/CD - might have a few placeholders in these commands
+    * Check that the Sonarcloud result was good
+    * Check that Trivy is good
+    * Build all the docker images, publish to Dockerhub with versions (since we're on a monorepo, each service will receive similar versioning.  Is there a way to distinguish if code on a directory in a monorepo has changed?)
+* Documentation: 
+    * each README should include how to test, to lint.
+* Helm chart: ?!
+* Presentation: powerpoint slides.
+    * Review notes, build a chronological narrative
+    * Delve into tradoffs: 
+        * technical milestones clearly indicated, 
+        * unfamiliarity with many tools, goal is to meet hard requirements first. 
+        * Comments was indicated as optional, definitely don't have enough time so cutting it. 
+        * Having to work after hours.  
+        * Obtaining help on some technical bits from colleagues.
+    * Delve into some time sinks: 
+        * learning concepts, 
+        * adjusting organization, 
+        * reviewing checklists, 
+        * design choices. 
+        * Down time.  
+        * Reflection. 
+        * Distractions - various meetings and getting to know team and environmental context.  
+        * Computer setup.  
+        * Good software requires uptime and downtime for the humans involved.
+        * Opportunities for learning / increased capability:
+            * Kubernetes: moderate
+                * Helm: new
+                * Kind: new
+            * Go: new
+                * Fiber: new
+                * Ent: new
+            * Python: moderate
+                * FastAPI: new
+                * Motor: new
+            * Typescript: moderate
+                * NextJS: new
+                * Tailwind: new
+                * ReactJS: moderate
+            * concept: SLSA level 3: new
+            * concept: programmer competency matrix: new
+            * concept: SBOM concept: new
+
