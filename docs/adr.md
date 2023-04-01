@@ -233,7 +233,8 @@ Left to do
                 * NextJS: new
                 * Tailwind: new
                 * ReactJS: moderate
-            * concept: SLSA level 3: new
-            * concept: programmer competency matrix: new
-            * concept: SBOM concept: new
+            * concepts: 
+                * SLSA level 3: new
+                * programmer competency matrix: new
+                * SBOM concept: new
 
