@@ -215,7 +215,8 @@ Left to do
         * design choices. 
         * Down time.  
         * Reflection. 
-        * Distractions - various meetings and getting to know team and environmental context.  
+        * Distractions - various meetings and getting to know team and environmental context. 
+        * In general, flow state is awesome fun and makes time fly and will get all the work done in record time - unless you have to learn big new things.  Encountering a little thing (how do I use groupBy in this declarative fluent coding approach) won't pull you out, but learning whole new languages, frameworks, and applications will.  Learning big pieces like that is exhausting and will throw a wrench into the flow state. 
         * Computer setup.  
         * Good software requires uptime and downtime for the humans involved.
         * Opportunities for learning / increased capability:
