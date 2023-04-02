@@ -6,11 +6,24 @@ from pydantic import BaseModel, Field, EmailStr
 from bson import ObjectId
 from typing import Optional, List
 import motor.motor_asyncio
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
 db = client.auth
 
+# This is to handle CORS issues
+origins = [
+    "http://localhost:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class PyObjectId(ObjectId):
     @classmethod
@@ -79,9 +92,10 @@ async def register(user: UserModel = Body(...)):
 @app.post(
     "/login", response_description="verify credentials - i.e. authenticate", response_model=str
 )
-async def login(credentials: CredentialsModel = Body(...)):
+async def login(response: Response, credentials: CredentialsModel = Body(...)):
     if (await db["users"].find_one({"username": credentials.username, "password": credentials.password})) is not None:
-        return "This is a test"
+        response.set_cookie(key="auth", value="valid")
+        return "You have successfully authenticated"
 
     raise HTTPException(status_code=404, detail=f"No user found with those credentials")
 
