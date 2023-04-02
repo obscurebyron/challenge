@@ -4,9 +4,7 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./articles_api
+        
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -24,14 +22,17 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - name: run formatting check
+        working-directory: ./articles_api
         run: |
           # checks if gofmt (go format) has any qualms with the formatting
           diff -u <(echo -n) <(gofmt -d ./)
       - name: run tests
+        working-directory: ./articles_api
         run: |
           # runs the tests
           go test
       - name: run linter
+        working-directory: ./articles_api
         run: |
           # runs the linter
           go vet
