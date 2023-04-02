@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is testing the frontend
 on: [push]
 jobs:
   Explore-GitHub-Actions:
@@ -19,8 +19,12 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: npm ci
-         working-directory: ./frontend
-      - run: npm test
-         working-directory: ./frontend
+      - name: Clean and install
+        working-directory: ./frontend
+        run: |
+          npm ci 
+      - name: Run the Jest tests
+        working-directory: ./frontend
+        run: |
+          npm test
       - run: echo "🍏 This job's status is ${{ job.status }}."
