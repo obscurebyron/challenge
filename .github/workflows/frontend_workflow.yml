@@ -39,6 +39,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          file: frontend/Dockerfile
+          context: frontend/
           push: true
           tags: obscurebyron/challenge_frontend:latest
       - run: echo "🍏 This job's status is ${{ job.status }}."
