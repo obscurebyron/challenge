@@ -26,14 +26,15 @@ jobs:
         run: |
           # checks if gofmt (go format) has any qualms with the formatting
           diff -u <(echo -n) <(gofmt -d ./)
+      - name: grab the dependencies
+        run: |
+          go get .
       - name: run tests
         working-directory: ./articles_api
         run: |
-          # runs the tests
           go test
       - name: run linter
         working-directory: ./articles_api
         run: |
-          # runs the linter
           go vet
       - run: echo "🍏 This job's status is ${{ job.status }}."
