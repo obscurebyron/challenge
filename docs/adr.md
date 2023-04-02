@@ -186,15 +186,15 @@ Left to do
 * linting for each microservice  
     * frontend (typescript) DONE
     * auth (go) DONE
-    * articles (python)
+    * articles (python) DONE
 * register to have sonarcloud connected to the project, have it run each time
-* SBOM - isn't that already handled?
+* SBOM - isn't that already handled? DONE(?)
     * frontend - package-lock.json
     * auth - requirements.txt
     * articles - go.mod
 * Trivy - available as a Docker image.  Involved during CI/CD
 * CI/CD - might have a few placeholders in these commands
-    * Check that the Sonarcloud result was good
+    * Check that the Sonarcloud result was good 
     * Check that Trivy is good
     * Build all the docker images, publish to Dockerhub with versions (since we're on a monorepo, each service will receive similar versioning.  Is there a way to distinguish if code on a directory in a monorepo has changed?)
 * Documentation: 
