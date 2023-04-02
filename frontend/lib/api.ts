@@ -17,7 +17,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   type Items = {
     [key: string]: string
   }
-
+  
   const items: Items = {}
 
   // Ensure only the minimal needed data is exposed
@@ -37,11 +37,31 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   return items
 }
 
-export function getAllPosts(fields: string[] = []) {
-  const slugs = getPostSlugs()
-  const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
-    // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
-  return posts
+export async function getAllPosts(fields: string[] = []) {
+
+  try {
+    const res = await fetch('http://127.0.0.1:4000/article');
+    
+    const data = await res.json();
+    console.log(data)
+    const convertedData = data
+      .map(p => ({
+        oid: p.oid,
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.excerpt,
+        date: p.date,
+        coverImage: p.coverImage,
+        author: {
+          name: p.author_name,
+          picture: p.author_picture_url
+        }
+      }))
+   
+    return convertedData
+  } catch (err) {
+    console.log(err);
+  }
+
+   
 }
