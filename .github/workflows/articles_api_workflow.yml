@@ -20,14 +20,16 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - name: run tests
+      - name: run formatting check
         run: |
           # checks if gofmt (go format) has any qualms with the formatting
           diff -u <(echo -n) <(gofmt -d ./)
-
+      - name: run tests
+        run: |
           # runs the tests
           go test
-
+      - name: run linter
+        run: |
           # runs the linter
           go vet
       - run: echo "🍏 This job's status is ${{ job.status }}."
