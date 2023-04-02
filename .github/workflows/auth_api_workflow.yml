@@ -23,6 +23,7 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: run tests
+        working-directory: ./auth_api
         run: |
           pytest
       - run: echo "🍏 This job's status is ${{ job.status }}."
