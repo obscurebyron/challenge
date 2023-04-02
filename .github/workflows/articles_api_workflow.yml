@@ -27,6 +27,7 @@ jobs:
           # checks if gofmt (go format) has any qualms with the formatting
           diff -u <(echo -n) <(gofmt -d ./)
       - name: grab the dependencies
+        working-directory: ./articles_api
         run: |
           go get .
       - name: run tests
