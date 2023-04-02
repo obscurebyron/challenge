@@ -2,9 +2,9 @@ import os
 from fastapi import FastAPI, Body, HTTPException, status
 from fastapi.responses import Response, JSONResponse
 from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field
 from bson import ObjectId
-from typing import Optional, List
+from typing import Optional
 import motor.motor_asyncio
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -90,12 +90,16 @@ async def register(user: UserModel = Body(...)):
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_user)
 
 @app.post(
-    "/login", response_description="verify credentials - i.e. authenticate", response_model=str
+    "/login", 
+    response_description="verify credentials - i.e. authenticate", 
+    response_model=str
 )
 async def login(response: Response, credentials: CredentialsModel = Body(...)):
-    if (await db["users"].find_one({"username": credentials.username, "password": credentials.password})) is not None:
+    if (await db["users"].
+        find_one({"username": credentials.username, "password": credentials.password})
+        ) is not None:
         response.set_cookie(key="auth", value="valid")
         return "You have successfully authenticated"
 
-    raise HTTPException(status_code=404, detail=f"No user found with those credentials")
+    raise HTTPException(status_code=404, detail="No user found with those credentials")
 

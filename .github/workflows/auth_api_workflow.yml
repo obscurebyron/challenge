@@ -29,5 +29,5 @@ jobs:
       - name: run tests
         working-directory: ./auth_api
         run: |
-          pytest
+          pytest tests
       - run: echo "🍏 This job's status is ${{ job.status }}."
