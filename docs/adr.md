@@ -180,12 +180,12 @@ Left to do
 * testing 
     * can be done in one shot as a Playwright test - a single register/login/"like" an article should exercise all parts.  Minimal tests for maximum value.
     * microservice needs:
-        * frontend - jest unit tests for components (does not connect to backends)
-        * auth - api tests with mocked data
-        * article - api tests with mocked data
+        * frontend - jest unit tests for components (does not connect to backends) DONE
+        * auth - api tests with mocked data PLACEHOLDER DONE
+        * article - api tests with mocked data PLACEHOLDER DONE
 * linting for each microservice  
-    * frontend (typescript)
-    * auth (go)
+    * frontend (typescript) DONE
+    * auth (go) DONE
     * articles (python)
 * register to have sonarcloud connected to the project, have it run each time
 * SBOM - isn't that already handled?

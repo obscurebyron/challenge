@@ -22,6 +22,10 @@ jobs:
         working-directory: ./auth_api
         run: |
           pip install -r requirements.txt
+      - name: linting
+        working-directory: ./auth_api
+        run: |
+          ruff check .
       - name: run tests
         working-directory: ./auth_api
         run: |
