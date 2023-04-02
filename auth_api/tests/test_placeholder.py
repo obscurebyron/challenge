@@ -5,5 +5,4 @@ def test_sqrt():
    assert math.sqrt(num) == 5
 
 def testsquare():
-   num = 7
    assert 7*7 == 49
