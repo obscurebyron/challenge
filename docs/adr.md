@@ -164,14 +164,14 @@ Left to do
 ----------
 
 * wireup between frontend and articles backend
-    * receive blogs from backend database
-    * schema for blogs in postgres database
-    * types for blogs in backend
-    * database migration in backend
-    * how to record favorability for an article?
+    * receive blogs from backend database DONE
+    * schema for blogs in postgres database DONE
+    * types for blogs in backend DONE
+    * database migration in backend DONE
+    * how to record favorability for an article? WON'T DO
 * wireup between frontend and auth backend
-    * login should return with a setCookie that the frontend can use to determine auth
-    * (secondary) if auth'd, ability to mark favorability ("like/dislike") on an article
+    * login should return with a setCookie that the frontend can use to determine auth DONE
+    * (secondary) if auth'd, ability to mark favorability ("like/dislike") on an article WON'T DO
 * orchestration of system startup, in chronological order:
     1. databases - heartbeats for each
     2. api's
