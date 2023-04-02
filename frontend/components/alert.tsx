@@ -1,26 +1,35 @@
 import Container from './container'
 import cn from 'classnames'
-import { EXAMPLE_PATH } from '../lib/constants'
 import Link from 'next/link'
 
 type Props = {
-  preview?: boolean
+  isAuthenticated?: boolean
 }
 
-const Alert = ({ preview }: Props) => {
+const Alert = ({ isAuthenticated }: Props) => {
   return (
     <div
       className={cn('border-b', {
-        'bg-neutral-800 border-neutral-800 text-white': preview,
-        'bg-neutral-50 border-neutral-200': !preview,
+        'bg-neutral-800 border-neutral-800 text-white': isAuthenticated,
+        'bg-neutral-50 border-neutral-200': !isAuthenticated,
       })}
     >
       <Container>
         <div className="py-2 text-center text-sm">
-        <div>
-           You are currently unauthenticated. {' '}
-           <Link href="/login" className="underline hover:text-blue-600 duration-200 transition-colors">Authenticate</Link>
-        </div>
+          
+            {
+              isAuthenticated ?
+                <div>
+                  You are currently authenticated {' '}
+                  <Link href="/login" className="underline hover:text-blue-600 duration-200 transition-colors">Logout</Link>
+                </div>
+              :
+                <div>
+                  You are currently unauthenticated. {' '}
+                  <Link href="/login" className="underline hover:text-blue-600 duration-200 transition-colors">Authenticate</Link>
+                </div>
+            }
+
         </div>
       </Container>
     </div>

@@ -3,16 +3,16 @@ import Footer from './footer'
 import Meta from './meta'
 
 type Props = {
-  preview?: boolean
+  isAuthenticated?: boolean
   children: React.ReactNode
 }
 
-const Layout = ({ preview, children }: Props) => {
+const Layout = ({ isAuthenticated, children }: Props) => {
   return (
     <>
       <Meta />
       <div className="min-h-screen">
-        <Alert preview={preview} />
+        <Alert isAuthenticated={isAuthenticated} />
         <main>{children}</main>
       </div>
       <Footer />

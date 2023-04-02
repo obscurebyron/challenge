@@ -7,6 +7,7 @@ import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 import Post from '../interfaces/post'
+import IsAuth from '../lib/auth'
 
 type Props = {
   allPosts: Post[]
@@ -15,9 +16,10 @@ type Props = {
 export default function Index({ allPosts }: Props) {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
+
   return (
     <>
-      <Layout>
+      <Layout isAuthenticated={false}>
         <Head>
           <title>{`Blog Challenge with ${CMS_NAME}`}</title>
         </Head>
