@@ -70,7 +70,7 @@ class UpdateUserModel(BaseModel):
 
 
 @app.post("/register", response_description="Add new user", response_model=UserModel)
-async def create_user(user: UserModel = Body(...)):
+async def register(user: UserModel = Body(...)):
     user = jsonable_encoder(user)
     new_user = await db["users"].insert_one(user)
     created_user = await db["users"].find_one({"_id": new_user.inserted_id})
@@ -79,7 +79,7 @@ async def create_user(user: UserModel = Body(...)):
 @app.post(
     "/login", response_description="verify credentials - i.e. authenticate", response_model=str
 )
-async def show_user(credentials: CredentialsModel = Body(...)):
+async def login(credentials: CredentialsModel = Body(...)):
     if (await db["users"].find_one({"username": credentials.username, "password": credentials.password})) is not None:
         return "This is a test"
 
