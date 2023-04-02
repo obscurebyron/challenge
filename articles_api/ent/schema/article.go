@@ -30,7 +30,7 @@ func (Article) Fields() []ent.Field {
 		field.Text("author_name").
 			NotEmpty(),
 		field.Text("author_picture_url").
-			NotEmpty(),	
+			NotEmpty(),
 		field.Text("open_graph_image_url").
 			NotEmpty(),
 		field.Text("content").
