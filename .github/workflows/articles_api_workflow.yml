@@ -46,8 +46,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          file: auth_api/Dockerfile
-          context: auth_api/
+          file: articles_api/Dockerfile
+          context: articles_api/
           push: true
-          tags: obscurebyron/challenge_auth_api:latest
+          tags: obscurebyron/challenge_articles_api:latest
       - run: echo "🍏 This job's status is ${{ job.status }}."
