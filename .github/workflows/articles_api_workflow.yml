@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Articles API workflow
 run-name: ${{ github.actor }} is testing the articles API
 on: [push]
 jobs:
