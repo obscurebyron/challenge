@@ -14,7 +14,7 @@ db = client.auth
 
 # This is to handle CORS issues
 origins = [
-    "http://frontendp:3000"
+    "http://localhost:3000"
 ]
 
 app.add_middleware(
