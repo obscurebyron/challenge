@@ -1,61 +1,135 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "blogchart.fullname" . }}
-  labels:
-    {{- include "blogchart.labels" . | nindent 4 }}
+  name: challenge-frontendp
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: 1
   selector:
     matchLabels:
-      {{- include "blogchart.selectorLabels" . | nindent 6 }}
+      app: frontend
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "blogchart.selectorLabels" . | nindent 8 }}
+        app: frontend
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "blogchart.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      - name: frontendp
+        image: obscurebyron/challenge_frontend:latest
+        ports:
+        - containerPort: 3000
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: challenge-authp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authp
+  template:
+    metadata:
+      labels:
+        app: authp  
+    spec:
+      containers:
+      - name: authp
+        image: obscurebyron/challenge_auth_api:latest
+        env:
+          - name: MONGODB_URL
+            value: "mongodb://root:example@mongodb/?retryWrites=true&w=majority"
+        ports:
+        - containerPort: 8000
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: challenge-articlesp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: articlesp
+  template:
+    metadata:
+      labels:
+        app: articlesp  
+    spec:
+      containers:
+      - name: articlesp
+        image: obscurebyron/challenge_articles_api:latest
+        env:
+          - name: DB_USER
+            value: "postgres"
+          - name: DB_NAME
+            value: "postgres"
+          - name: DB_HOST
+            value: "postgresp"
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_PASSWORD
+            value: "example"
+          - name: APP_PORT
+            value: "4000"
+        ports:
+        - containerPort: 4000       
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: challenge-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb  
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        env:
+          - name: MONGO_INITDB_DATABASE
+            value: "mongodb"
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: "root"
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: "example"
+        ports:
+        - containerPort: 27017      
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: challenge-postgresdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresp
+  template:
+    metadata:
+      labels:
+        app: postgresp  
+    spec:
+      containers:
+      - name: postgresp
+        image: postgres:latest
+        env:
+          - name: POSTGRES_USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "postgres"
+        ports:
+        - containerPort: 5432                

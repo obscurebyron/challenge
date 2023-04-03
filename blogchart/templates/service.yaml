@@ -1,15 +1,53 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "blogchart.fullname" . }}
-  labels:
-    {{- include "blogchart.labels" . | nindent 4 }}
+  name: articlesp
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
-    {{- include "blogchart.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/name: articlesp
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: authp
+spec:
+  selector:
+    app.kubernetes.io/name: authp
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresp
+spec:
+  selector:
+    app.kubernetes.io/name: postgresp
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  selector:
+    app.kubernetes.io/name: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
