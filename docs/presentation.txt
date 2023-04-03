@@ -1,0 +1,42 @@
+* Introduction - who I am
+
+* purpose of the evaluation
+
+* general technical description of the goal
+
+* chronological summary of journey
+
+* Opportunities for learning / increased capability:
+    * Kubernetes: moderate
+        * Helm: new
+        * Kind: new
+    * Go: new
+        * Fiber: new
+        * Ent: new
+    * Python: moderate
+        * FastAPI: new
+        * Motor: new
+    * Typescript: moderate
+        * NextJS: new
+        * Tailwind: new
+        * ReactJS: moderate
+    * Tools:
+        * Trivy: new
+    * concepts: 
+        * SLSA level 3: new
+        * programmer competency matrix: new
+        * SBOM concept: new
+
+* Delve into some time sinks: 
+    * learning concepts, 
+    * adjusting organization, 
+    * reviewing checklists, 
+    * design choices, big and small
+    * Down time.  
+    * Reflection. 
+    * CORS
+    * Firewalls
+    * Distractions - various meetings and getting to know team and environmental context. 
+    * In general, flow state is awesome fun and makes time fly and will get all the work done in record time - unless you have to learn big new things.  Encountering a little thing (how do I use groupBy in this declarative fluent coding approach) won't pull you out, but learning whole new languages, frameworks, and applications will.  Learning big pieces like that is exhausting and will throw a wrench into the flow state. 
+    * Computer setup.  
+    * Good software requires uptime and downtime for the humans involved.
