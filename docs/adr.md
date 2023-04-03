@@ -178,7 +178,7 @@ Left to do
     3. front-end
     4. ingress
 * testing 
-    * can be done in one shot as a Playwright test - a single register/login/"like" an article should exercise all parts.  Minimal tests for maximum value.
+    * can be done in one shot as a Playwright test - a single register/login/"like" an article should exercise all parts.  Minimal tests for maximum value. DONE
     * microservice needs:
         * frontend - jest unit tests for components (does not connect to backends) DONE
         * auth - api tests with mocked data PLACEHOLDER DONE
@@ -196,9 +196,9 @@ Left to do
 * CI/CD - might have a few placeholders in these commands
     * Check that the Sonarcloud result was good 
     * Check that Trivy is good
-    * Build all the docker images, publish to Dockerhub with versions (since we're on a monorepo, each service will receive similar versioning.  Is there a way to distinguish if code on a directory in a monorepo has changed?)
+    * Build all the docker images, publish to Dockerhub with versions (since we're on a monorepo, each service will receive similar versioning.  Is there a way to distinguish if code on a directory in a monorepo has changed?) DONE
 * Documentation: 
-    * each README should include how to test, to lint.
+    * each README should include how to test, to lint. DONE
 * Helm chart: ?!
 * Presentation: powerpoint slides.
     * Review notes, build a chronological narrative

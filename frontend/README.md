@@ -8,3 +8,11 @@ Install Node using Homebrew: `brew install node`
 Run locally with:
 
     npm run dev
+
+Run lint:
+
+    npm run lint
+
+Run tests:
+
+    npm test

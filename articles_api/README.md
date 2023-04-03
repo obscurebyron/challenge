@@ -8,6 +8,14 @@ To start locally:
 * Start the app: `go run main.go`
 * Site should be running at http://127.0.0.1:4000/
     
+To run linting:
+
+    go vet
+
+To run tests:
+
+    go test
+
 Endpoints:
 
 Get all articles:

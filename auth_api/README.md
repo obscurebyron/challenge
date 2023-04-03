@@ -12,6 +12,14 @@ To start locally:
 * Run the app: `python -m uvicorn app:app --reload`
 * View the Swagger docs at http://127.0.0.1:8000/docs#/
 
+To run linting:
+
+    ruff check .
+
+to run tests:
+
+    pytest tests
+
 Endpoints:
 
 Register a new user:
