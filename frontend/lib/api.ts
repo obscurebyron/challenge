@@ -10,7 +10,7 @@ export function getPostSlugs() {
 export async function getPostBySlug(slug: string) {
 
   try {
-    const res = await fetch('http://127.0.0.1:4000/article/'+slug);
+    const res = await fetch('http://articlesp:4000/article/'+slug);
     const data = await res.json();
 
     const convertedData ={
@@ -37,7 +37,7 @@ export async function getPostBySlug(slug: string) {
 export async function getAllPosts(fields: string[] = []) {
 
   try {
-    const res = await fetch('http://127.0.0.1:4000/article');    
+    const res = await fetch('http://articlesp:4000/article');    
     const data = await res.json();
 
     const convertedData = data

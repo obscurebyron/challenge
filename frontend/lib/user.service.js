@@ -3,7 +3,7 @@ import Router from 'next/router';
 
 import { fetchWrapper } from 'helpers';
 
-const baseUrl = `http://localhost:8000`;
+const baseUrl = `http://authp:8000`;
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 export const userService = {
