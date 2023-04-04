@@ -3,8 +3,6 @@ version: '3'
 services:
   web:
     build: .
-    env_file:
-      - .env
     command: bash -c "
       uvicorn greens.main:app
       --host 0.0.0.0 --port 8989
@@ -21,13 +19,10 @@ services:
 
   mongodb:
     image: mongo:latest
-    env_file:
-      - .env
     ports:
       - "27017:27017"
     environment:
-      - "MONGO_INITDB_DATABASE=${MONGO_DB}"
-      - "MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}"
-      - "MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS}"
+      - "MONGO_INITDB_ROOT_USERNAME=root"
+      - "MONGO_INITDB_ROOT_PASSWORD=example"
     command:
       mongod --quiet --logpath /dev/null

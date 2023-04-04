@@ -47,14 +47,9 @@ function Register() {
                     <div className="card-body">
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group">
-                                <label>First Name</label>
-                                <input name="firstName" type="text" {...register('firstName')} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} />
-                                <div className="invalid-feedback">{errors.firstName?.message}</div>
-                            </div>
-                            <div className="form-group">
-                                <label>Last Name</label>
-                                <input name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`} />
-                                <div className="invalid-feedback">{errors.lastName?.message}</div>
+                                <label>Name</label>
+                                <input name="name" type="text" {...register('name')} className={`form-control ${errors.name ? 'is-invalid' : ''}`} />
+                                <div className="invalid-feedback">{errors.name?.message}</div>
                             </div>
                             <div className="form-group">
                                 <label>Username</label>
